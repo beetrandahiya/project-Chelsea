@@ -1,7 +1,7 @@
 elem = document.getElementById("container");
 svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
 svg.setAttributeNS(null, "width", "100%");
-svg.setAttributeNS(null, "height", "400");
+svg.setAttributeNS(null, "height", "600");
 elem.appendChild(svg);
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -121,6 +121,60 @@ class rect{
     }
 }
 
+///////////////////////////////////////////////////////////////////////////////
+////////////////////// POINT  ///////////////////////////////////////////////
+
+class point{
+    constructor(x, y, stroke,stroke_width) {
+        this.x = x;
+        this.y = y;
+        this.stroke = stroke;
+        this.stroke_width = stroke_width;
+        this.point = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        this.point.setAttributeNS(null, "cx", this.x);
+        this.point.setAttributeNS(null, "cy", this.y);
+        this.point.setAttributeNS(null, "r", this.stroke_width/2);
+        this.point.setAttributeNS(null, "stroke", this.stroke);
+        this.point.setAttributeNS(null, "stroke-width", this.stroke_width);
+        svg.appendChild(this.point);
+        return this;
+    }
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+////////////////////// LINE  ///////////////////////////////////////////////
+
+class line{
+    constructor(x1, y1, x2, y2, stroke,stroke_width, linecap, dasharray) {
+
+        this.x1 = x1;
+        this.y1 = y1;
+        this.x2 = x2;
+        this.y2 = y2;
+        this.stroke = stroke;
+        this.stroke_width = stroke_width;
+        this.dasharray = dasharray;
+        this.linecap = linecap;
+        this.line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        this.line.setAttributeNS(null, "x1", this.x1);
+        this.line.setAttributeNS(null, "y1", this.y1);
+        this.line.setAttributeNS(null, "x2", this.x2);
+        this.line.setAttributeNS(null, "y2", this.y2);
+        this.line.setAttributeNS(null, "stroke", this.stroke);
+        this.line.setAttributeNS(null, "stroke-width", this.stroke_width);
+        this.line.setAttributeNS(null, "stroke-dasharray", this.dasharray);
+        this.line.setAttributeNS(null, "stroke-linecap", this.linecap);
+        svg.appendChild(this.line);
+        return this;
+
+}
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+
+
 ///////////// function to Clear canvas on every draw /////////////////////////////////
 
 function clearcanvas() {
@@ -132,6 +186,13 @@ function clearcanvas() {
 
 
 
-
+////////// function to map a value from one range to another ///////////////////////
+// linearly maps value from the range (a..b) to (c..d)
+function mapRange (value, a, b, c, d) {
+    // first map value from (a..b) to (0..1)
+    value = (value - a) / (b - a);
+    // then map it from (0..1) to (c..d) and return it
+    return c + value * (d - c);
+}
 
 
