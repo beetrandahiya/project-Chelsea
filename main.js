@@ -174,6 +174,77 @@ class line{
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////// TEXT ///////////////////////////////////////////////////
 
+class text{
+    constructor(x, y, inputtext, font_size, font_family, font_weight,stroke, stroke_width, fill, anchor) {
+        this.x = x;
+        this.y = y;
+        this.inputtext = inputtext;
+        this.font_size = font_size;
+        this.font_family = font_family;
+        this.font_weight = font_weight;
+        this.fill = fill;
+        this.stroke = stroke;
+        this.stroke_width = stroke_width;
+        this.anchor = anchor;
+        this.text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        this.text.setAttributeNS(null, "x", this.x);
+        this.text.setAttributeNS(null, "y", this.y);
+        this.text.setAttributeNS(null, "font-size", this.font_size);
+        this.text.setAttributeNS(null, "font-family", this.font_family);
+        this.text.setAttributeNS(null, "font-weight", this.font_weight);
+        this.text.setAttributeNS(null, "fill", this.fill);
+        this.text.setAttributeNS(null, "text-anchor", this.anchor);
+        this.text.setAttributeNS(null, "stroke", this.stroke);
+        this.text.setAttributeNS(null, "stroke-width", this.stroke_width);
+        
+        this.text.innerHTML = this.inputtext;
+        console.log(this.text);
+        svg.appendChild(this.text);
+        return this;
+    }
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+///////////////////// REGULAR POLYGON ///////////////////////////////////////////////////
+
+class regpolygon{
+    constructor(x,y,radius,sides,rotation,stroke,stroke_width,fill,fill_opacity) {
+        this.x = x;
+        this.y = y;
+        this.radius = radius;
+        this.sides = sides;
+        this.rotation = rotation;
+        this.stroke = stroke;
+        this.stroke_width = stroke_width;
+        this.fill = fill;
+        this.fill_opacity = fill_opacity;
+        
+        this.regpolygon = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
+        this.regpolygon.setAttributeNS(null, "points", this.points());
+        this.regpolygon.setAttributeNS(null, "stroke", this.stroke);
+        this.regpolygon.setAttributeNS(null, "stroke-width", this.stroke_width);
+        this.regpolygon.setAttributeNS(null, "fill", this.fill);
+        this.regpolygon.setAttributeNS(null, "fill-opacity", this.fill_opacity);
+        svg.appendChild(this.regpolygon);
+        return this;
+        
+    }
+    points(){
+        var points = "";
+        var angle = (Math.PI*2)/this.sides;
+        for(var i=0; i<this.sides; i++){
+            var x = this.x+this.radius*Math.cos(angle*i+this.rotation);
+            var y = this.y+this.radius*Math.sin(angle*i+this.rotation);
+            points += x+","+y+" ";
+        }
+        return points;
+    }
+   
+}
+
+
+
 
 
 
