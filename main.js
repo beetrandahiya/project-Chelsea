@@ -322,7 +322,7 @@ class cubicbezier{
         return this;
     }
 
-    ////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
 //////////////////// Code from project-G ///////////////////////////
 //////////////////////////////////////////////////////////////////
         
@@ -370,23 +370,69 @@ class cubicbezier{
         angle: Math.atan2(lengthY, lengthX)
         }
     }
-           
-////////////////////////////////////////////////////////////////////////////////
-
-
-
     
 }
 
 
+//////////////////////////////////////////////////////////////////////////
+/////////////////////// ARC /////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+
+class arc{
+    constructor(cx, cy, rx,ry, start_angle , end_angle, fill_type,stroke,stroke_width,fill, fill_opacity){
+        this.cx=cx;
+        this.cy=cy;
+        this.rx=rx;
+        this.ry=ry;
+        this.start=start_angle;
+        this.end=end_angle;
+        this.fill_type= fill_type;
+        this.stroke=stroke;
+        this.stroke_width=stroke_width;
+        this.fill=fill;
+        this.fill_opacity=fill_opacity;
+        this.arc=document.createElementNS("http://www.w3.org/2000/svg","path");
+        this.arc.setAttributeNS(null,"d",this.dval(this.cx,this.cy,this.rx,this.ry,this.start,this.end,this.fill_type));
+        this.arc.setAttributeNS(null,"stroke",this.stroke);
+        this.arc.setAttributeNS(null,"stroke-width",this.stroke_width);
+        this.arc.setAttributeNS(null,"fill",this.fill);
+        this.arc.setAttributeNS(null,"fill-opacity",this.fill_opacity);
+        svg.appendChild(this.arc);
+        return this;
+
+
+
+    }
+
+    dval(cx, cy, rx,ry, start_angle , end_angle, fill_type){
+        const Δo = (end_angle-start_angle);
+        const fA = ((Δo > Math.PI) ? 1 : 0);
+        const fS = ((Δo > 0) ? 1 : 0);
+        const start_pointx=cx+rx*Math.sin(start_angle);
+        const start_pointy=cy-ry*Math.cos(start_angle);
+        const end_pointx=cx+rx*Math.sin(end_angle);
+        const end_pointy=cy-ry*Math.cos(end_angle);
+        var dpath= ` M ${start_pointx},${start_pointy} A ${rx} ${ry} 0 ${fA} ${fS} ${end_pointx} ${end_pointy} `;
+        
+        switch(fill_type){
+            case "pie":
+                dpath+= "L " +cx+","+cy+" Z";
+                break;
+            case "chord":
+                dpath+= " Z";
+                break;
+            case "open":
+                break;
+
+        }
+
+
+        return dpath;
+
+    }
     
-        
-        
-       
 
-
-
-
+}
 
 
 
