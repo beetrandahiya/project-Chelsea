@@ -21,7 +21,7 @@ function draw() {
 
     new text(100, 100, "Enough is E-fuckin-nough" , 30, "Arial","400");
     new regpolygon(300,300,50,3,0,"#444",3,"fff","0.2");
-    new polygon([[100,200],[233,45],[45,533]],"#333",2,"#f34",1,true);
+    new cubicbezier([[100,200],[233,45],[45,533]],"#333",2,"#f34",0.8,0.2);
 
     
     requestAnimationFrame(draw);

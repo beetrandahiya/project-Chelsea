@@ -298,6 +298,91 @@ class polygon{
     }
 }
 
+////////////////////////////////////////////////////////////////////
+//////////////////// CUBIC BEZIER //////////////////////////////////
+//////////////////////////////////////////////////////////////////
+
+class cubicbezier{
+    constructor(points,stroke,stroke_width,fill,fill_opacity,line_tension){
+        this.points=points;
+        this.stroke=stroke;
+        this.stroke_width=stroke_width;
+        this.fill=fill;
+        this.fill_opacity=fill_opacity;
+        this.line_tension=line_tension??0.2;
+        
+
+        this.cubicbezier = document.createElementNS("http://www.w3.org/2000/svg","path");
+        this.cubicbezier.setAttributeNS(null, "d",this.svgPath(this.points, this.bezierCommand));
+        this.cubicbezier.setAttributeNS(null, "stroke", this.stroke);
+        this.cubicbezier.setAttributeNS(null,"stroke-width",this.stroke_width);
+        this.cubicbezier.setAttributeNS(null, "fill",this.fill);
+        this.cubicbezier.setAttributeNS(null, "fill-opacity", this.fill_opacity);
+        svg.appendChild(this.cubicbezier);
+        return this;
+    }
+
+    ////////////////////////////////////////////////////////////////////
+//////////////////// Code from project-G ///////////////////////////
+//////////////////////////////////////////////////////////////////
+        
+        
+    svgPath(points, command) {
+        this.dval = points.reduce((acc, point, i, a) => i === 0
+            ? `M ${point[0]},${point[1]}`
+            : `${acc} ${command(point, i, a)}`
+            , '')
+            if(this.close==true){
+                dval+="Z";
+            }
+
+
+            return this.dval;
+    }
+    bezierCommand = (point, i, a) => {
+        // start control point
+        const [cpsX, cpsY] = this.controlPoint(a[i - 1], a[i - 2], point)
+        // end control point
+        const [cpeX, cpeY] = this.controlPoint(point, a[i - 1], a[i + 1], true)
+        return `C ${cpsX},${cpsY} ${cpeX},${cpeY} ${point[0]},${point[1]}`
+    }
+    controlPoint = (current, previous, next, reverse) => {
+
+        const p = previous || current
+        const n = next || current
+       
+        const smoothing =this.line_tension;
+       
+        const o = this.bline(p, n)
+        const angle = o.angle + (reverse ? Math.PI : 0)
+        const length = o.length * smoothing
+        
+        const x = current[0] + Math.cos(angle) * length
+        const y = current[1] + Math.sin(angle) * length
+        return [x, y]
+    }
+
+    bline = (pointA, pointB) => {
+        const lengthX = pointB[0] - pointA[0]
+        const lengthY = pointB[1] - pointA[1]
+        return {
+        length: Math.sqrt(Math.pow(lengthX, 2) + Math.pow(lengthY, 2)),
+        angle: Math.atan2(lengthY, lengthX)
+        }
+    }
+           
+////////////////////////////////////////////////////////////////////////////////
+
+
+
+    
+}
+
+
+    
+        
+        
+       
 
 
 
