@@ -2,7 +2,24 @@ elem = document.getElementById("container");
 svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
 svg.setAttributeNS(null, "width", "100%");
 svg.setAttributeNS(null, "height", "600");
+svg.setAttributeNS(null, "id", "svgelem");
+//svg.setAttributeNS(null , "transform","translate(100,100)")
 elem.appendChild(svg);
+
+
+///////////////////////////////////////////////////////////////////////
+///////////////  CONSTANTS /////////////////////////////////////////////
+
+const PI = Math.PI;
+const TAU = 2 * Math.PI;
+const HALF_PI = Math.PI / 2;
+const QUARTER_PI = Math.PI / 4;
+const THIRD_PI = Math.PI / 3;
+const TWO_PI = Math.PI * 2;
+const PHI = (1 + Math.sqrt(5)) / 2;
+
+
+
 
 ///////////////////////////////////////////////////////////////////////////////
 ////////////////////// CIRCLE  ///////////////////////////////////////////////
@@ -198,7 +215,6 @@ class text{
         this.text.setAttributeNS(null, "stroke-width", this.stroke_width);
         
         this.text.innerHTML = this.inputtext;
-        console.log(this.text);
         svg.appendChild(this.text);
         return this;
     }
@@ -244,6 +260,47 @@ class regpolygon{
 }
 
 
+////////////////////////////////////////////////////////////////////
+//////////////////// POLYGON //////////////////////////////////////
+//////////////////////////////////////////////////////////////////
+
+
+class polygon{
+    constructor(inppoints,stroke,stroke_width,fill , fill_opacity,close){
+        this.inppoints=inppoints;
+        this.stroke= stroke;
+        this.stroke_width = stroke_width;
+        this.fill = fill;
+        this.fill_opacity = fill_opacity;
+        this.close = close ?? false;
+        
+        this.polygon = document.createElementNS("http://www.w3.org/2000/svg","path");
+        this.polygon.setAttributeNS(null, "d",this.pathd());    
+        this.polygon.setAttributeNS(null, "stroke", this.stroke);
+        this.polygon.setAttributeNS(null,"stroke-width",this.stroke_width);
+        this.polygon.setAttributeNS(null, "fill",this.fill);
+        this.polygon.setAttributeNS(null, "fill-opacity", this.fill_opacity);
+        svg.appendChild(this.polygon);
+        return this;
+    }
+
+    pathd(){
+        var dtext=" M "+this.inppoints[0][0]+","+this.inppoints[0][1];
+        for(var i=0 ; i<this.inppoints.length;i++){
+            dtext+= "L " +this.inppoints[i][0]+","+this.inppoints[i][1]+ " ";
+
+        }
+        if(this.close==true){
+            dtext+= "Z";
+        }
+        
+        return dtext;
+    }
+}
+
+
+
+
 
 
 
@@ -269,4 +326,72 @@ function mapRange (value, a, b, c, d) {
 }
 ///////////////////////////////////////////////////////////////////////////////
 
+
+/////////// function to convert degree to radian ///////////////////
+function degToRad(deg) {
+    return deg * Math.PI / 180;
+}
+///////////////////////////////////////////////////////////////////////////////
+
+////////////// common mathematical functions ///////////////////////////////
+function sin(angle) {
+    return Math.sin(angle);
+}
+
+function cos(angle) {
+    return Math.cos(angle);
+}
+
+function tan(angle) {
+    return Math.tan(angle);
+}
+
+function asin(angle) {
+    return Math.asin(angle);
+}
+
+function acos(angle){
+    return Math.acos(angle);
+}
+
+function abs(e){
+    return Math.abs(e);
+}
+function sqrt(e){
+    return Math.sqrt(e);
+}
+function pow(e,p){
+    return Math.pow(e,p);
+}
+function exp(e){
+    return Math.exp(e);
+}
+function log(e){
+    return Math.log(e);
+}
+function log10(e){
+    return Math.log10(e);
+}
+function floor(e){
+    return Math.floor(e);
+}
+function ceil(e){
+    return Math.ceil(e);
+}
+function round(e){
+    return Math.round(e);
+}
+
+function dist(x1,y1,x2,y2){
+    return Math.sqrt(pow(x2-x1,2)+pow(y2-y1,2));
+}
+
+function max(a){
+    return Math.max(...a);
+}
+function min(a){
+    return Math.min(...a);
+}
+
+///////////////////////////////////////////////////////////////////////////////
 
