@@ -1,10 +1,18 @@
-elem = document.getElementById("container");
-svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-svg.setAttributeNS(null, "width", "100%");
-svg.setAttributeNS(null, "height", "600");
-svg.setAttributeNS(null, "id", "svgelem");
-//svg.setAttributeNS(null , "transform","translate(100,100)")
-elem.appendChild(svg);
+
+
+///////////////////////////////////////////////////////////////////////
+/////////////// Basic functions //////////////////////////////////////
+function setCanvas(element){
+    elem=element;
+    svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttributeNS(null, "width", "100%");
+    svg.setAttributeNS(null, "height", "100%");
+    elem.appendChild(svg);
+    WIDTH =svg.clientWidth;
+    HEIGHT =svg.clientHeight;
+
+
+}
 
 
 ///////////////////////////////////////////////////////////////////////
@@ -18,6 +26,45 @@ const THIRD_PI = Math.PI / 3;
 const TWO_PI = Math.PI * 2;
 const PHI = (1 + Math.sqrt(5)) / 2;
 
+
+
+///////////////////////////////////////////////////////////////////////
+///////////////////Scaling functions //////////////////////////////////
+
+function random(a,b){
+    return Math.random()*(b-a)+a;
+}
+
+function randomInt(a,b){
+    return Math.floor(Math.random()*(b-a)+a);
+}
+
+function randomBool(){
+    return Math.random()>0.5;
+}
+
+function randomColorRGB(){
+    return "rgb("+randomInt(0,255)+","+randomInt(0,255)+","+randomInt(0,255)+")";
+}
+
+function randomColorHex(){
+    return "#"+randomInt(0,255).toString(16)+randomInt(0,255).toString(16)+randomInt(0,255).toString(16);
+}
+
+function randomColorHSL(){
+    return "hsl("+randomInt(0,360)+","+randomInt(0,100)+"%,"+randomInt(0,100)+"%)";
+}
+
+function clamp(e,a,b){                        //constrain value of e between a and b
+    return Math.min(Math.max(e,a),b);
+}
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////
+///////////////  VECTOR FUNCTIONS //////////////////////////////////////
 
 
 
