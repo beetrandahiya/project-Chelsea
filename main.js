@@ -346,6 +346,70 @@ class polygon{
 }
 
 ////////////////////////////////////////////////////////////////////
+//////////////////// TWO POINT CUBIC BEZIER ////////////////////////
+//////////////////////////////////////////////////////////////////
+
+
+class twoPointCubicBezier{
+    constructor(x1,y1,xc1,yc1,x2,y2,xc2,yc2,stroke,stroke_width,fill,fill_opacity){
+        this.x1=x1;
+        this.y1=y1;
+        this.xc1=xc1;
+        this.yc1=yc1;
+        this.x2=x2;
+        this.y2=y2;
+        this.xc2=xc2;
+        this.yc2=yc2;
+        this.stroke=stroke;
+        this.stroke_width=stroke_width;
+        this.fill=fill;
+        this.fill_opacity=fill_opacity;
+
+        this.twoPointCubicBezier = document.createElementNS("http://www.w3.org/2000/svg","path");
+        this.twoPointCubicBezier.setAttributeNS(null, "d",`M ${this.x1},${this.y1} C ${this.xc1},${this.yc1} ${this.xc2},${this.yc2} ${this.x2},${this.y2}`);
+        this.twoPointCubicBezier.setAttributeNS(null, "stroke", this.stroke);
+        this.twoPointCubicBezier.setAttributeNS(null,"stroke-width",this.stroke_width);
+        this.twoPointCubicBezier.setAttributeNS(null, "fill",this.fill);
+        this.twoPointCubicBezier.setAttributeNS(null, "fill-opacity", this.fill_opacity);
+        svg.appendChild(this.twoPointCubicBezier);
+        return this;
+
+    }
+
+
+}
+
+
+////////////////////////////////////////////////////////////////////
+//////////////////// TWO POINT QUADRATIC BEZIER ////////////////////////
+//////////////////////////////////////////////////////////////////
+class twoPointQuadraticBezier{
+    constructor(x1,y1,xc,yc,x2,y2,stroke,stroke_width,fill,fill_opacity){
+        this.x1=x1;
+        this.y1=y1;
+        this.xc=xc;
+        this.yc=yc;
+        this.x2=x2;
+        this.y2=y2;
+        this.stroke=stroke;
+        this.stroke_width=stroke_width;
+        this.fill=fill;
+        this.fill_opacity=fill_opacity;
+
+        this.twoPointQuadraticBezier = document.createElementNS("http://www.w3.org/2000/svg","path");
+        this.twoPointQuadraticBezier.setAttributeNS(null, "d",`M ${this.x1},${this.y1} Q ${this.xc},${this.yc} ${this.x2},${this.y2}`);
+        this.twoPointQuadraticBezier.setAttributeNS(null, "stroke", this.stroke);
+        this.twoPointQuadraticBezier.setAttributeNS(null,"stroke-width",this.stroke_width);
+        this.twoPointQuadraticBezier.setAttributeNS(null, "fill",this.fill);
+        this.twoPointQuadraticBezier.setAttributeNS(null, "fill-opacity", this.fill_opacity);
+        svg.appendChild(this.twoPointQuadraticBezier);
+        return this;
+
+    }}
+
+
+
+////////////////////////////////////////////////////////////////////
 //////////////////// CUBIC BEZIER //////////////////////////////////
 //////////////////////////////////////////////////////////////////
 
@@ -573,3 +637,14 @@ function min(a){
 
 ///////////////////////////////////////////////////////////////////////////////
 
+///////////// function to get mouse position /////////////////////////////////
+/*function getmousepos(canvas, evt) {
+    var rect = canvas.getBoundingClientRect();
+    return {
+      x: evt.clientX - rect.left,
+      y: evt.clientY - rect.top
+    };
+  }
+*/
+///////////////////////////////////////////////////////////////////////////////
+////////////// function  
