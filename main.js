@@ -638,13 +638,13 @@ function min(a){
 ///////////////////////////////////////////////////////////////////////////////
 
 ///////////// function to get mouse position /////////////////////////////////
-/*function getmousepos(canvas, evt) {
+function getmousepos(canvas, evt) {
     var rect = canvas.getBoundingClientRect();
     return {
       x: evt.clientX - rect.left,
       y: evt.clientY - rect.top
     };
   }
-*/
+
 ///////////////////////////////////////////////////////////////////////////////
 ////////////// function  
