@@ -639,6 +639,7 @@ function min(a){
 
 ///////////// function to get mouse position /////////////////////////////////
 
+
 mousepos={x:0,y:0};
   function fetch_mouse_pos(canvas, evt) {
     
@@ -651,6 +652,8 @@ mousepos={x:0,y:0};
         };
     });
 };
+
+//// use mousepos.x and mousepos.y to get mouse position /////////////////
 
 ///////////////////////////////////////////////////////////////////////////////
 ////////////// function  
