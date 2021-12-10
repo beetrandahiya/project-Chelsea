@@ -8,27 +8,25 @@ h=HEIGHT;
 t=0;
 
 
+   fetch_mouse_pos(elem,'click');
+   
+
+
 function draw() {
     clearcanvas();
 
     
-  /* for(i=0;i<w;i+=10){
-       new circle(i,h/2+60*sin(degToRad(i-t)),5,`hsl(${i/3},100%,50%)`,1);}
-  */
-       new circle(100,400,5,`hsl(${t/3},100%,50%)`,1);
+ 
+     new circle(100,400,5,`hsl(${t/3},100%,50%)`,1);
     
     new circle(200,200,5,`hsl(${t/3},100%,50%)`,1);
-    new circle(400,300,5,`hsl(${t/3},100%,50%)`,1);
+    new circle(mousepos.x,mousepos.y,5,`hsl(${t/3},100%,50%)`,1);
     new circle(400,400,5,`hsl(${t/3},100%,50%)`,1);
     new line(100,400,200,200,'#fff',1);
-    new line(400,400,400,300,'#fff',1);
+    new line(400,400,mousepos.x,mousepos.y,'#fff',1);
 
-    mousepos=elem.addEventListener("click",function(e){
-       
-            console.log(e.clientX,e.clientY);
-            return {x:e.clientX,y:e.clientY};
-          }) ;
-     new twoPointCubicBezier(100,400,200,200,400,300,400,400,`hsl(${t/3},100%,50%)`,1,'none',0);
+    
+     new twoPointCubicBezier(100,400,200,200,mousepos.x,mousepos.y,400,400,`hsl(${t/3},100%,50%)`,1,'none',0);
     //console.log(getmousepos(elem,'onclick'));
     //console.log(elem.addEventListener('click',getmousepos(elem,'onclick')));
   
