@@ -8,26 +8,33 @@ h=HEIGHT;
 
 
 
-   fetch_mouse_pos(elem,'ondragstart');
+   fetch_mouse_pos(elem,'mousemove');
    
    let x = 100,
   y = 100,
   angle1 = 0.0,
   segLength = 50;
-
+dx=0.1;
+dy=0.03;
 
 function draw() {
    
-     new circle(mousepos.x,mousepos.y,10,'#fff',1,'#000',1);
+  clearcanvas();
+    
+
+  for(i=0;i<10;i++){
+     
+    smokeparticle=new circle(w/2+x,y,10,'#fff',0.5);
+    x=x+random(-15,15);
+   
+  }
+
 
    requestAnimationFrame(draw);
  
 }
-function segment(x, y, a) {
-    
-     new line(x, y, x-segLength*cos(a), y-segLength*sin(a), '#fff',4);
-    
-   }
+
+
 ///////////////////////////////////////////////////////////////////////////////
 
 
