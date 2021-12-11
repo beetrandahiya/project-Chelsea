@@ -26,7 +26,7 @@ function draw() {
      
     smokeparticle=new circle(w/2+x,y,10,'#fff',0.5);
     x=x+random(-15,15);
-   
+    
   }
 
 
