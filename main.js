@@ -636,7 +636,6 @@ function min(a){
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-
 ///////////// function to get mouse position /////////////////////////////////
 
 
@@ -662,3 +661,47 @@ function lerp(a, b, n) {
     return (1 - n) * a + n * b;
 }
 
+///////////////////////////////////////////////////////////////////////////////
+/////////////// Cosine Interpolation Function ////////////////////////////////
+
+function cosrp(a, b, n) {
+    return a + (b - a) * (1 - Math.cos(n * Math.PI)) / 2;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+/////////////// PRNG (Psuedo Random Number Generator) /////////////////////////
+
+function PRNG(seed) {
+    var x = Math.sin(seed) * 10000;
+    return x - Math.floor(x);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+/////////////// Psuedo Random Array Generator ///////////////////////////////
+
+// x0=seed; a=multiplier; b=increment; m=modulus; n=desired array length;
+//  !isnt working well needto be changed
+
+function PRAG(x0,a,b,m,n){
+    const results=[];
+    for(let i=0;i<n;i++){
+        x0=(a*x0+b)%m;
+        results.push(x0);
+    }
+    return results;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+/////////////// lerp color ///////////////////////////////////////////////////
+
+function lerp_hex(a, b, n) {
+    var ah = parseInt(a.replace(/#/g, ''), 16),
+        ar = ah >> 16, ag = ah >> 8 & 0xff, ab = ah & 0xff,
+        bh = parseInt(b.replace(/#/g, ''), 16),
+        br = bh >> 16, bg = bh >> 8 & 0xff, bb = bh & 0xff,
+        rr = ar + n * (br - ar),
+        rg = ag + n * (bg - ag),
+        rb = ab + n * (bb - ab);
+    return '#' + ((1 << 24) + (rr << 16) + (rg << 8) + rb | 0).toString(16).slice(1);
+}

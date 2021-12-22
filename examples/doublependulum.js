@@ -1,17 +1,8 @@
-///////////////////////////////////////////////////////////////////////////////
+elem = document.getElementById("container");
+setCanvas(elem);
 
-//new circle(100, 100, 50, "#ff0000", "#000000");
-//new circle(200, 200, 50, "#00ff00", "#000000");
-t = 0;
-
-new rect(100, 100, 100, 100, "#ff0000", 1, "#000000", 1, "top-left", 30);
-
-///////////////////////////////////////////////////////////////////////////////
-
-
-w=svg.clientWidth;
-h=svg.clientHeight;
-
+w=WIDTH;
+h=HEIGHT;
 ///////////////////////////////////////////////////////////////////////////////
 canvw = 600;
 canvh = 600;
@@ -92,7 +83,7 @@ function draw() {
 
     px2 = x2;
    py2 = y2;
-    requestAnimationFrame(draw);
+    //requestAnimationFrame(draw);
     
 }
 

@@ -8,10 +8,10 @@ body{
 }
 
 #container{
-    width: 80%;
-    height: 80vh;
+    width: 60%;
+    height: 60vh;
     margin: 0 auto;
-    background-color: #001;
+    background-color: #000;
     border: 1px solid #ccc; 
     border-radius: 5px;
 }
