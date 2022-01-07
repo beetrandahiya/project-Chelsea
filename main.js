@@ -61,8 +61,6 @@ function clamp(e,a,b){                        //constrain value of e between a a
 
 
 
-
-
 ////////////////////////////////////////////////////////////////////////
 ///////////////  VECTOR FUNCTIONS //////////////////////////////////////
 
@@ -144,8 +142,8 @@ class rect{
         this.rect.setAttributeNS(null, "stroke", this.stroke);
         this.rect.setAttributeNS(null, "stroke-width", this.stroke_width);
         this.rect.setAttributeNS(null, "fill-opacity", this.fill_opacity);
-        this.rect.setAttributeNS(null, "rx", border_radius);
-        this.rect.setAttributeNS(null, "ry", border_radius);
+        this.rect.setAttributeNS(null, "rx", this.border_radius);
+        this.rect.setAttributeNS(null, "ry", this.border_radius);
         switch(anchor){
             case "center":
                 this.rect.setAttributeNS(null, "x", this.x-this.width/2);
@@ -635,6 +633,25 @@ function min(a){
     return Math.min(...a);
 }
 
+function factorial(n) {
+    if (n == 0 || n == 1)
+        return 1;
+    return n * factorial(n - 1);
+}
+
+function combinations(n,r){
+    return factorial(n)/(factorial(r)*factorial(n-r));
+}
+ 
+function makecombinations(arr){
+    var combs=[];
+    for(var i=0;i<arr.length;i++){
+        for(var j=i+1;j<arr.length;j++){
+            combs.push([arr[i],arr[j]]);
+        }
+    }
+    return combs;
+}
 ///////////////////////////////////////////////////////////////////////////////
 ///////////// function to get mouse position /////////////////////////////////
 

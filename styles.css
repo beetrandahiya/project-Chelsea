@@ -8,7 +8,7 @@ body{
 }
 
 #container{
-    width: 60%;
+    width: 60vh;
     height: 60vh;
     margin: 0 auto;
     background-color: #000;
