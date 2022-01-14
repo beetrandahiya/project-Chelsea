@@ -17,7 +17,7 @@ h=HEIGHT;
 
 
 function draw() {
-    clearcanvas();
+    clearCanvas();
 
     
     dx = mousepos.x - x;

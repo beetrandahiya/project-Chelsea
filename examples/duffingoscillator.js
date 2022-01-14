@@ -18,7 +18,7 @@ d=0.3;
 let points = [];
 
 function draw() {
-    clearcanvas();
+    clearCanvas();
 
     //lorentz
     dt=0.01;

@@ -49,7 +49,7 @@ v=1;
 
 function draw() {
    
-  clearcanvas();
+  clearCanvas();
   
   new circle(x1,y1,10,'#C10FF0','#000000');
   new circle(x2,y2,10,'#EA4567');

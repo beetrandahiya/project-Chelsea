@@ -41,7 +41,7 @@ h=HEIGHT;
 
 function draw() {
   // console.log(Forces[0].x);
-  clearcanvas();
+  clearCanvas();
   combs=[];
   for(i=0;i<pos.length;i++){
     for(var j=i+1;j<pos.length;j++){

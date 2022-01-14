@@ -32,7 +32,7 @@ function cos(x){
 points=[];
 
 function draw() {
-    clearcanvas();
+    clearCanvas();
     let num1 = -g * (2 * m1 + m2) * sin(a1);
     let num2 = -m2 * g * sin(a1 - 2 * a2);
     let num3 = -2 * sin(a1 - a2) * m2;

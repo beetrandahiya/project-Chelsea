@@ -547,7 +547,7 @@ class arc{
 
 ///////////// function to Clear canvas on every draw /////////////////////////////////
 
-function clearcanvas() {
+function clearCanvas() {
     while (svg.firstChild) {
         svg.removeChild(svg.lastChild);
     }
