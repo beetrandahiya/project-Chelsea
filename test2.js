@@ -13,6 +13,7 @@ h=HEIGHT;
  t=0;
  loadFont("BADABB__.TTF",'badaboom');
 function draw() {
+  setCursor('crosshair');
   
   clearCanvas();
   

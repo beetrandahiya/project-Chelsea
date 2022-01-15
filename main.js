@@ -60,12 +60,6 @@ function clamp(e,a,b){                        //constrain value of e between a a
 }
 
 
-
-////////////////////////////////////////////////////////////////////////
-///////////////  VECTOR FUNCTIONS //////////////////////////////////////
-
-
-
 ///////////////////////////////////////////////////////////////////////////////
 ////////////////////// CIRCLE  ///////////////////////////////////////////////
 
@@ -600,6 +594,193 @@ function loadFont(url,font_family){
     font.innerHTML = "@font-face { font-family: '"+font_family+"'; src: url('"+url+"'); }";
     document.head.appendChild(font);
 }
+
+
+///////////////////////////////////////////////////////////////////////////////
+///////////////////// CURSOR ///////////////////////////////////////////////////
+function setCursor(cursor) {
+    svg.style.cursor = cursor;
+}
+///////////////////////////////////////////////////////////////////////////////
+///////////////////// TIME ///////////////////////////////////////////////////
+
+function getTime(){
+    var d = new Date();
+    var h = d.getHours();
+    var m = d.getMinutes();
+    var s = d.getSeconds();
+    var ms = d.getMilliseconds();
+    var time = {
+        h: h,
+        m: m,
+        s: s,
+        ms: ms
+    };
+    return time;
+}
+
+function getDate(){
+    var d = new Date();
+    var y = d.getFullYear();
+    var m = d.getMonth()+1;
+    var day = d.getDate();
+    var date = {
+        y: y,
+        m: m,
+        day: day
+    };
+    return date;
+}
+
+function getTimeString(){
+    var d = new Date();
+    var h = d.getHours();
+    var m = d.getMinutes();
+    var s = d.getSeconds();
+    var ms = d.getMilliseconds();
+    var time = h+":"+m+":"+s+":"+ms;
+    return time;
+}
+
+function getDateString(format){
+    var d = new Date();
+    var y = d.getFullYear();
+    var m = d.getMonth()+1;
+    var day = d.getDate();
+    format=format??'dd-mm-yyyy';
+    format=format.toLowerCase();
+    switch(format){
+        case "yyyy-mm-dd":
+            var date = y+"/"+m+"/"+day;
+            break;
+        case "dd-mm-yyyy":
+            var date = day+"/"+m+"/"+y;
+            break;
+        case "mm-dd-yyyy":
+            var date = m+"/"+day+"/"+y;
+            break;
+        case "yyyy-dd-mm":
+            var date = y+"/"+day+"/"+m;
+            break;
+        case "dd-yyyy-mm":
+            var date = day+"/"+y+"/"+m;
+            break;
+        case "mm-yyyy-dd":
+            var date = m+"/"+y+"/"+day;
+            break;
+    }
+    return date;
+}
+
+function getDayName(){
+    var d = new Date();
+    var day = d.getDay();
+    var dayname = "";
+    switch(day){
+        case 0:
+            dayname = "Sunday";
+            break;
+        case 1:
+            dayname = "Monday";
+            break;
+        case 2:
+            dayname = "Tuesday";
+            break;
+        case 3:
+            dayname = "Wednesday";
+            break;
+        case 4:
+            dayname = "Thursday";
+            break;
+        case 5:
+            dayname = "Friday";
+            break;
+        case 6:
+            dayname = "Saturday";
+            break;
+}
+return dayname;
+
+
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+/////////////////// Time taken for function execution /////////////////////////
+
+function timeTaken(func){
+    var t0 = performance.now();
+    func();
+    var t1 = performance.now();
+    return t1 - t0;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+/////////////////// Vectors ///////////////////////////////////////////////////
+
+function createVector(x, y) {
+    return {
+        x: x,
+        y: y
+    };
+}
+
+function dotProduct(v1, v2) {
+    return v1.x * v2.x + v1.y * v2.y;
+}
+
+function crossProduct(v1, v2) {
+    return v1.x * v2.y - v1.y * v2.x;
+}
+
+function length(v) {
+    return Math.sqrt(dotProduct(v, v));
+}
+
+function normalize(v) {
+    var l = length(v);
+    return createVector(v.x / l, v.y / l);
+}
+
+function angleBetween(v1, v2) {
+    return Math.acos(dotProduct(v1, v2) / (length(v1) * length(v2)));
+}
+
+function rotate(v, angle) {
+    var s = Math.sin(angle);
+    var c = Math.cos(angle);
+    return createVector(v.x * c - v.y * s, v.x * s + v.y * c);
+}
+
+function addVec(v1, v2) {
+    return createVector(v1.x + v2.x, v1.y + v2.y);
+}
+
+function subtractVec(v1, v2) {
+    return createVector(v1.x - v2.x, v1.y - v2.y);
+}
+
+function multiplyVec(v, scalar) {
+    return createVector(v.x * scalar, v.y * scalar);
+}
+
+function divideVec(v, scalar) {
+    return createVector(v.x / scalar, v.y / scalar);
+}
+
+function distanceVec(v1, v2) {
+    return length(subtract(v1, v2));
+}
+
+function angle(v) {
+    return Math.atan2(v.y, v.x);
+}
+
+function randomVector(min, max) {
+    return createVector(Math.random() * (max - min) + min, Math.random() * (max - min) + min);
+}
+
 
 
 ///////////// function to Clear canvas on every draw /////////////////////////////////
