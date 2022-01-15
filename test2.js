@@ -10,42 +10,18 @@ h=HEIGHT;
 
    fetch_mouse_pos(elem,'mousemove');
    
- 
+ t=0;
+ loadFont("BADABB__.TTF",'badaboom');
 function draw() {
   
   clearCanvas();
   
-  for(i=0;i<w;i+=1){
-    for(j=0;j<h;j+=1){
-        var a= mapRange(i,0,w,-2,1);
-        var b= mapRange(j,0,h,-1.5,1.5);
-        var ca=a;
-        var cb=b;
-
-        var n=0;
-        while(n<100){
-
-            var aa=a*a-b*b;
-            var bb=2*a*b;
-            a=aa+ca;
-            b=bb+cb;
-            if(a+b>4){
-                break;
-            }
-            n++;
-        }
-
-        var c=mapRange(n,0,100,0,360);
-        var cr=mapRange(n,0,100,0,186);
-        var cg=mapRange(n,0,100,0,245);
-        var cb=mapRange(n,0,100,0,247);
-        var color='rgb('+cr+','+cg+','+cb+')';
-        new rect(i,j,2.5,2.5,color,1,'#fff',0,'top-left',0);
-
-
-    }};
-
- //requestAnimationFrame(draw);
+  new star(w/2,h/2,200,70,4,t,'#fff',1,"#f00",1);
+  //new regpolygon(w/2,h/2,200,5,t,'#fff',1,"#f00",1);
+  color=randomColorHex();
+  new text(w/2-50,h/2,"hello bitches!",50,'badaboom',400,color,2,0,"#000",1);
+  t+=0.005;
+ requestAnimationFrame(draw);
  
 }
 

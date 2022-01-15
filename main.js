@@ -233,37 +233,6 @@ class line{
 }
 }
 
-///////////////////////////////////////////////////////////////////////////////
-///////////////////// TEXT ///////////////////////////////////////////////////
-
-class text{
-    constructor(x, y, inputtext, font_size, font_family, font_weight,stroke, stroke_width, fill, anchor) {
-        this.x = x;
-        this.y = y;
-        this.inputtext = inputtext;
-        this.font_size = font_size;
-        this.font_family = font_family;
-        this.font_weight = font_weight;
-        this.fill = fill;
-        this.stroke = stroke;
-        this.stroke_width = stroke_width;
-        this.anchor = anchor;
-        this.text = document.createElementNS("http://www.w3.org/2000/svg", "text");
-        this.text.setAttributeNS(null, "x", this.x);
-        this.text.setAttributeNS(null, "y", this.y);
-        this.text.setAttributeNS(null, "font-size", this.font_size);
-        this.text.setAttributeNS(null, "font-family", this.font_family);
-        this.text.setAttributeNS(null, "font-weight", this.font_weight);
-        this.text.setAttributeNS(null, "fill", this.fill);
-        this.text.setAttributeNS(null, "text-anchor", this.anchor);
-        this.text.setAttributeNS(null, "stroke", this.stroke);
-        this.text.setAttributeNS(null, "stroke-width", this.stroke_width);
-        
-        this.text.innerHTML = this.inputtext;
-        svg.appendChild(this.text);
-        return this;
-    }
-}
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -302,6 +271,51 @@ class regpolygon{
         return points;
     }
    
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+///////////////////// STAR ///////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+
+class star{
+    constructor(x,y,outer_radius,inner_radius,sides,rotation,stroke,stroke_width,fill,fill_opacity) {
+        this.x=x;
+        this.y=y;
+        this.outer_radius=outer_radius;
+        this.inner_radius=inner_radius;
+        this.rotation=rotation;
+        this.sides=sides;
+        this.stroke=stroke;
+        this.stroke_width=stroke_width;
+        this.fill=fill;
+        this.fill_opacity=fill_opacity;
+
+        this.star=document.createElementNS("http://www.w3.org/2000/svg", "polygon");
+        this.star.setAttributeNS(null, "points", this.points());
+        this.star.setAttributeNS(null, "stroke", this.stroke);
+        this.star.setAttributeNS(null, "stroke-width", this.stroke_width);
+        this.star.setAttributeNS(null, "fill", this.fill);
+        this.star.setAttributeNS(null, "fill-opacity", this.fill_opacity);
+        svg.appendChild(this.star);
+        return this;
+
+    }
+    points(){
+        var points = "";
+        var outer_angle = (Math.PI*2)/this.sides;
+        var inner_angle = (Math.PI)/this.sides;
+        for(var i=0; i<this.sides; i++){ 
+            var xv = this.x+this.outer_radius*Math.cos(outer_angle*i+this.rotation);
+            var yv = this.y+this.outer_radius*Math.sin(outer_angle*i+this.rotation);
+            points += xv+","+yv+" ";
+            var xv = this.x+this.inner_radius*Math.cos(inner_angle+(i*outer_angle)+this.rotation);
+            var yv = this.y+this.inner_radius*Math.sin(inner_angle+(i*outer_angle )+this.rotation);
+            points += xv+","+yv+" ";
+        }
+        return points;
+    }
+
 }
 
 
@@ -543,6 +557,49 @@ class arc{
 
 }
 
+
+
+///////////////////////////////////////////////////////////////////////////////
+///////////////////// TEXT ///////////////////////////////////////////////////
+
+class text{
+    constructor(x, y, inputtext, font_size, font_family, font_weight,stroke, stroke_width, fill, anchor) {
+        this.x = x;
+        this.y = y;
+        this.inputtext = inputtext;
+        this.font_size = font_size;
+        this.font_family = font_family;
+        this.font_weight = font_weight;
+        this.fill = fill;
+        this.stroke = stroke;
+        this.stroke_width = stroke_width;
+        this.anchor = anchor;
+        this.text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        this.text.setAttributeNS(null, "x", this.x);
+        this.text.setAttributeNS(null, "y", this.y);
+        this.text.setAttributeNS(null, "font-size", this.font_size);
+        this.text.setAttributeNS(null, "font-family", this.font_family);
+        this.text.setAttributeNS(null, "font-weight", this.font_weight);
+        this.text.setAttributeNS(null, "fill", this.fill);
+        this.text.setAttributeNS(null, "text-anchor", this.anchor);
+        this.text.setAttributeNS(null, "stroke", this.stroke);
+        this.text.setAttributeNS(null, "stroke-width", this.stroke_width);
+        
+        this.text.innerHTML = this.inputtext;
+        svg.appendChild(this.text);
+        return this;
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////
+///////////////////// FONT ///////////////////////////////////////////////////
+
+function loadFont(url,font_family){
+    var font = document.createElement("style");
+    font.type = "text/css";
+    font.innerHTML = "@font-face { font-family: '"+font_family+"'; src: url('"+url+"'); }";
+    document.head.appendChild(font);
+}
 
 
 ///////////// function to Clear canvas on every draw /////////////////////////////////
