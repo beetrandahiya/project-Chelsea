@@ -59,6 +59,17 @@ function clamp(e,a,b){                        //constrain value of e between a a
     return Math.min(Math.max(e,a),b);
 }
 
+function randomGaussian(mean, stdev) {
+    var y1, x1, x2, w;
+    do {
+        x1 = 2.0 * Math.random() - 1.0;
+        x2 = 2.0 * Math.random() - 1.0;
+        w = x1 * x1 + x2 * x2;
+    } while (w >= 1.0);
+    return mean + stdev * x1 * Math.sqrt(-2.0 * Math.log(w) / w);
+}
+
+
 
 ///////////////////////////////////////////////////////////////////////////////
 ////////////////////// CIRCLE  ///////////////////////////////////////////////
