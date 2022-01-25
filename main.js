@@ -95,6 +95,7 @@ class circle {
     }
 }
 
+
 ///////////////////////////////////////////////////////////////////////////////
 ////////////////////// ELLIPSE  ///////////////////////////////////////////////
 
@@ -220,8 +221,8 @@ class line{
         this.y2 = y2;
         this.stroke = stroke;
         this.stroke_width = stroke_width;
-        this.dasharray = dasharray;
-        this.linecap = linecap;
+        this.dasharray = dasharray??[];
+        this.linecap = linecap??"butt";
         this.line = document.createElementNS("http://www.w3.org/2000/svg", "line");
         this.line.setAttributeNS(null, "x1", this.x1);
         this.line.setAttributeNS(null, "y1", this.y1);
@@ -329,7 +330,7 @@ class star{
 
 
 class polygon{
-    constructor(inppoints,stroke,stroke_width,fill , fill_opacity,close){
+    constructor(inppoints,fill , fill_opacity,stroke,stroke_width,close){
         this.inppoints=inppoints;
         this.stroke= stroke;
         this.stroke_width = stroke_width;
@@ -506,7 +507,7 @@ class cubicbezier{
 /////////////////////////////////////////////////////////////////////////
 
 class arc{
-    constructor(cx, cy, rx,ry, start_angle , end_angle, fill_type,stroke,stroke_width,fill, fill_opacity){
+    constructor(cx, cy, rx,ry, start_angle , end_angle, fill_type,fill, fill_opacity,stroke,stroke_width){
         this.cx=cx;
         this.cy=cy;
         this.rx=rx;
