@@ -824,6 +824,8 @@ function degToRad(deg) {
 ///////////////////////////////////////////////////////////////////////////////
 
 ////////////// common mathematical functions ///////////////////////////////
+
+// trignometry functions
 function sin(angle) {
     return Math.sin(angle);
 }
@@ -843,6 +845,30 @@ function asin(angle) {
 function acos(angle){
     return Math.acos(angle);
 }
+
+function atan(angle){
+    return Math.atan(angle);
+}
+
+function atan2(angle){
+    return Math.atan2(angle);
+}
+
+function atanh(angle){
+    return Math.atanh(angle);
+}
+
+function sinh(angle){
+    return Math.sinh(angle);
+}
+function cosh(angle){
+    return Math.cosh(angle);
+}
+function tanh(angle){
+    return Math.tanh(angle);
+}
+///////////////////////
+
 
 function abs(e){
     return Math.abs(e);
