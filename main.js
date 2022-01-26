@@ -569,7 +569,7 @@ class arc{
 ///////////////////// TEXT ///////////////////////////////////////////////////
 
 class text{
-    constructor(x, y, inputtext, font_size, font_family, font_weight,stroke, stroke_width, fill, anchor) {
+    constructor(x, y, inputtext, font_size, font_family, font_weight,stroke, stroke_width, fill, anchor="start") {
         this.x = x;
         this.y = y;
         this.inputtext = inputtext;
