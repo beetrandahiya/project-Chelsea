@@ -850,8 +850,8 @@ function atan(angle){
     return Math.atan(angle);
 }
 
-function atan2(angle){
-    return Math.atan2(angle);
+function atan2(y,x){
+    return Math.atan2(y,x);
 }
 
 function atanh(angle){
