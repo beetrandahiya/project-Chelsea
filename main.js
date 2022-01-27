@@ -816,7 +816,6 @@ function mapRange (value, a, b, c, d) {
 }
 ///////////////////////////////////////////////////////////////////////////////
 
-
 /////////// function to convert degree to radian ///////////////////
 function degToRad(deg) {
     return deg * Math.PI / 180;
@@ -918,6 +917,9 @@ function factorial(n) {
 function combinations(n,r){
     return factorial(n)/(factorial(r)*factorial(n-r));
 }
+function permutations(n,r){
+    return factorial(n)/factorial(n-r);
+}
  
 function makecombinations(arr){
     var combs=[];
@@ -962,6 +964,17 @@ function cosrp(a, b, n) {
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+/////////////// smoothstep function //////////////////////////////////////////
+
+function smoothstep(a, b, x) {
+    var t = clamp((x - a) / (b - a), 0, 1);
+    return t * t * (3 - 2 * t);
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////
 /////////////// PRNG (Psuedo Random Number Generator) /////////////////////////
 
 function PRNG(seed) {
@@ -998,3 +1011,5 @@ function lerp_hex(a, b, n) {
         rb = ab + n * (bb - ab);
     return '#' + ((1 << 24) + (rr << 16) + (rg << 8) + rb | 0).toString(16).slice(1);
 }
+
+
