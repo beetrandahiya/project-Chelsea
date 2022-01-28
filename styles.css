@@ -15,3 +15,7 @@ body{
     border: 1px solid #ccc; 
     border-radius: 5px;
 }
+
+:not(svg){
+    transform-origin: center;
+}

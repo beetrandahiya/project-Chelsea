@@ -560,8 +560,15 @@ class arc{
         return dpath;
 
     }
-    
 
+    /*
+    use in next version
+    
+    rotate(angle){
+        this.arc.style.transform = `rotate(${angle}rad)`;
+    }
+    
+*/
 }
 
 

@@ -10,20 +10,17 @@ h=HEIGHT;
 
    fetch_mouse_pos(elem,'mousemove');
    
-
+t=0;
  loadFont("BADABB__.TTF",'badaboom');
 function draw() {
  // setCursor('crosshair');
-  
-  clearCanvas();
+ clearCanvas();
 
-  for(i=0;i<1;i+=0.02) {
-    x=mapRange(i,0,1,0,WIDTH);
-    c=cosrp(0,HEIGHT,i);
-    new point(x,HEIGHT-c,'red',4);
-  }
+  ar=new arc(WIDTH/2,HEIGHT/2,200,200,PI/4,0,'pie','#ff0000',1,'#ff0000',1);
  
+  ar.rotate(t);
  requestAnimationFrame(draw);
+ t+=0.01;
  
 }
 
