@@ -1218,7 +1218,7 @@ function HextoHSL(H){
 }
 }
 
-function HSLToHex(h,s,l) {
+function HSLtoHex(h,s,l) {
     s /= 100;
     l /= 100;
   
