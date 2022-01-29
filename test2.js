@@ -14,12 +14,15 @@ t=0;
  loadFont("BADABB__.TTF",'badaboom');
 function draw() {
  // setCursor('crosshair');
- clearCanvas();
 
-  ar=new arc(WIDTH/2,HEIGHT/2,200,200,PI/4,0,'pie','#ff0000',1,'#ff0000',1);
- 
-  ar.rotate(t);
- requestAnimationFrame(draw);
+
+for(i=0;i<WIDTH;i+=5) {
+   ic=clamp(i,0,1);
+   y=smootherstep(0,WIDTH,i);
+  
+   new point(i,HEIGHT*y,'#f0f',5);
+}
+
  t+=0.01;
  
 }
