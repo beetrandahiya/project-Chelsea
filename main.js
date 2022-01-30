@@ -681,22 +681,22 @@ function getDateString(format='dd-mm-yyyy'){
     format=format.toLowerCase();
     switch(format){
         case "yyyy-mm-dd":
-            var date = y+"/"+m+"/"+day;
+            var date = y+"-"+m+"-"+day;
             break;
         case "dd-mm-yyyy":
-            var date = day+"/"+m+"/"+y;
+            var date = day+"-"+m+"-"+y;
             break;
         case "mm-dd-yyyy":
-            var date = m+"/"+day+"/"+y;
+            var date = m+"-"+day+"-"+y;
             break;
         case "yyyy-dd-mm":
-            var date = y+"/"+day+"/"+m;
+            var date = y+"-"+day+"-"+m;
             break;
         case "dd-yyyy-mm":
-            var date = day+"/"+y+"/"+m;
+            var date = day+"-"+y+"-"+m;
             break;
         case "mm-yyyy-dd":
-            var date = m+"/"+y+"/"+day;
+            var date = m+"-"+y+"-"+day;
             break;
         case "yyyy/mm/dd":
             var date = y+"/"+m+"/"+day;
