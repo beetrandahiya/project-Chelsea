@@ -670,7 +670,13 @@ function getDateString(format='dd-mm-yyyy'){
     var d = new Date();
     var y = d.getFullYear();
     var m = d.getMonth()+1;
+    if(m.length<1){
+        m="0"+m;
+    }
     var day = d.getDate();
+    if(day.length<1){
+        day="0"+day;
+    }
     format=format;
     format=format.toLowerCase();
     switch(format){
@@ -690,6 +696,24 @@ function getDateString(format='dd-mm-yyyy'){
             var date = day+"/"+y+"/"+m;
             break;
         case "mm-yyyy-dd":
+            var date = m+"/"+y+"/"+day;
+            break;
+        case "yyyy/mm/dd":
+            var date = y+"/"+m+"/"+day;
+            break;
+        case "dd/mm/yyyy":
+            var date = day+"/"+m+"/"+y;
+            break;
+        case "mm/dd/yyyy":
+            var date = m+"/"+day+"/"+y;
+            break;
+        case "yyyy/dd/mm":
+            var date = y+"/"+day+"/"+m;
+            break;
+        case "dd/yyyy/mm":
+            var date = day+"/"+y+"/"+m;
+            break;
+        case "mm/yyyy/dd":
             var date = m+"/"+y+"/"+day;
             break;
     }
