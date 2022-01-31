@@ -1,4 +1,6 @@
-var fps = document.getElementById("fps");
+function frameRate(outputelement) {
+
+var fps = document.querySelector(outputelement);
 var startTime = Date.now();
 var frame = 0;
 
@@ -13,3 +15,6 @@ function tick() {
   window.requestAnimationFrame(tick);
 }
 tick();
+}
+
+frameRate('#fps');
