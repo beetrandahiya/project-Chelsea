@@ -150,11 +150,9 @@ function draw() {
 
    }
 
-  
-
-   t += 0.01;
+   
  requestAnimationFrame(draw);
-
+   
 
 }
 
