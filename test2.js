@@ -53,6 +53,7 @@ c = 1;
 
 
 
+
 function draw() {
 
    clearCanvas();

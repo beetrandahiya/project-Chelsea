@@ -6,12 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Test svg anim</title>
     <link rel="stylesheet" href="styles.css">
+    
 </head>
 <body>
+    <defs>
+        <filter id="glow">
+            <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+            <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
     <div id="container" ></div>
     <span id="fps">--</span> FPS
+
     <script src="main.js"></script>
     <script src="test2.js"></script>
     <script src="fpscounter.js"></script>
+    
 </body>
 </html>

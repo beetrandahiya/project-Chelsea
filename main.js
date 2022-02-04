@@ -1076,7 +1076,7 @@ function PRAG(x0,a,b,m,n){
 ///////////////////////////////////////////////////////////////////////////////
 /////////////// lerp color ///////////////////////////////////////////////////
 
-function lerp_hex(a, b, n) {
+function lerpHex(a, b, n) {
     var ah = parseInt(a.replace(/#/g, ''), 16),
         ar = ah >> 16, ag = ah >> 8 & 0xff, ab = ah & 0xff,
         bh = parseInt(b.replace(/#/g, ''), 16),
