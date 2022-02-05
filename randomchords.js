@@ -6,14 +6,9 @@ h = HEIGHT;
 
 
 
-fetch_mouse_pos(elem, 'mousemove');
-loadFont("BADABB__.TTF", 'badaboom');
-
-
-
 function draw() {
 
-   clearCanvas();
+  // clearCanvas();
 
    // find a random point on a circle
   let angle1 = random(0, 2 * PI);
