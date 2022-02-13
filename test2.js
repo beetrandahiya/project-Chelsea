@@ -4,7 +4,7 @@ setCanvas(elem);
 w = WIDTH;
 h = HEIGHT;
 
-data={0: '9657', 1: '672', 2: '951', 3: '', 4: '8', 5: '0729', 6: '081', 7: '051', 8: '964', 9: '0582'}
+data={0: '412', 1: '4023', 2: '4013', 3: '421', 4: '0213'}
 
 
 
@@ -70,6 +70,27 @@ for(i=0;i<data1.length;i++){
 
 }
 
+for(i=0;i<data1.length;i++){
+   if(data1[i].length==1){
+      a=i;
+      b=data1[i][0];
+      console.log(a,b);
+      if(a>b){
+         data1[a]=[];
+         data1[b]=[];
+         d1.push(a);
+         nodeState[a]=0;
+      }
+      else{
+         data1[b]=[];
+         data1[a]=[];
+         d1.push(b);
+         nodeState[b]=0;
+      }
+   }
+
+}
+
 
 
 
@@ -98,7 +119,7 @@ function draw() {
    }
    for(i=0;i<data1.length;i++){
       for(j=0;j<data1[i].length;j++){
-         k=data[i][j];
+         k=data1[i][j];
          new line(points1[i].x,points1[i].y,points1[k].x,points1[k].y,'#695fe7',1);
        
    }
