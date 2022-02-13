@@ -21,41 +21,54 @@ for(i=0;i<data.length;i++){
    }
    nodeState.push(1);
 }
-//console.log(data1);
 
 
-
-
-/*
+d1=[];
 
 for(i=0;i<data1.length;i++){
-
    for(j=0;j<data1[i].length;j++){
-      k=data1[i][j];
-      a=data1[i].length;
-      b=data1[k].length;
-      console.log(a,b);
+      k=parseInt(data1[i][j]);          // k is the index of connected node
 
+      a=data1[i].length;
+      b=data1[k].length;       //lengths of two connected nodes
+
+      console.log(a,b);
       if(a>b){
+         d1.push(i); 
          data1[i]=[];
          nodeState[i]=0;
-         console.log(i);
+         for(l=0;l<data1.length;l++){
+            if(l!=i){
+               if(data1[l].includes(i)){
+                  console.log(l);
+                  data1[l].splice(data1[l].indexOf(i),1);
+                  console.log(data1[l]);
+                  
+               }
+            }
+         }
          break;
       }
       else if(a<b){
+         d1.push(k);
          data1[k]=[];
          nodeState[k]=0;
-         console.log(i);
+         for(l=0;l<data1.length;l++){
+            if(l!=k){
+               if(data1[l].includes(k)){
+                  console.log(l);
+                  data1[l].splice(data1[l].indexOf(k),1);
+                  console.log(data1[l]);
+
+               }
+            }
+         }
          break;
-      }
-      else if(a==b){
-         continue;
       }
       
    }
 
 }
-*/
 
 
 
@@ -71,12 +84,12 @@ for(i=0;i<data1.length;i++){
 
 
 
-points1=points(WIDTH/2,HEIGHT/3,100,data.length);
+
+points1=points(WIDTH/2,HEIGHT/3,100,data1.length);
 
 
 function draw() {
 
-   //clearCanvas();
 
    for(i=0;i<points1.length;i++){
       if(nodeState[i]==1){
@@ -91,7 +104,6 @@ function draw() {
    }
    }
 
-// requestAnimationFrame(draw);
    
 }
 
