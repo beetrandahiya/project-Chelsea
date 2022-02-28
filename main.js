@@ -436,7 +436,7 @@ class twoPointCubicBezier{
 //////////////////// TWO POINT QUADRATIC BEZIER ////////////////////////
 //////////////////////////////////////////////////////////////////
 class twoPointQuadraticBezier{
-    constructor(x1,y1,xc,yc,x2,y2,fill,fill_opacity,stroke,stroke_width){
+    constructor(x1,y1,xc,yc,x2,y2,fill,fill_opacity,stroke,stroke_width, filter_id){
         this.x1=x1;
         this.y1=y1;
         this.xc=xc;
@@ -447,6 +447,7 @@ class twoPointQuadraticBezier{
         this.stroke_width=stroke_width;
         this.fill=fill;
         this.fill_opacity=fill_opacity;
+        this.filter_id = filter_id || "";
 
         this.twoPointQuadraticBezier = document.createElementNS("http://www.w3.org/2000/svg","path");
         this.twoPointQuadraticBezier.setAttributeNS(null, "d",`M ${this.x1},${this.y1} Q ${this.xc},${this.yc} ${this.x2},${this.y2}`);
@@ -454,6 +455,7 @@ class twoPointQuadraticBezier{
         this.twoPointQuadraticBezier.setAttributeNS(null,"stroke-width",this.stroke_width);
         this.twoPointQuadraticBezier.setAttributeNS(null, "fill",this.fill);
         this.twoPointQuadraticBezier.setAttributeNS(null, "fill-opacity", this.fill_opacity);
+        this.twoPointQuadraticBezier.setAttributeNS(null, "filter", "url(#"+this.filter_id+")");
         svg.appendChild(this.twoPointQuadraticBezier);
         return this;
 
@@ -466,7 +468,7 @@ class twoPointQuadraticBezier{
 //////////////////////////////////////////////////////////////////
 
 class cubicbezier{
-    constructor(points,fill,fill_opacity,stroke,stroke_width,line_tension=0.2,close=false){
+    constructor(points,fill,fill_opacity,stroke,stroke_width,line_tension=0.2,close=false,filter_id) {
         this.points=points;
         this.stroke=stroke;
         this.stroke_width=stroke_width;
@@ -474,14 +476,15 @@ class cubicbezier{
         this.fill_opacity=fill_opacity;
         this.line_tension=line_tension;
         this.close=close;
+        this.filter_id = filter_id || "";
         
-
         this.cubicbezier = document.createElementNS("http://www.w3.org/2000/svg","path");
         this.cubicbezier.setAttributeNS(null, "d",this.svgPath(this.points, this.bezierCommand));
         this.cubicbezier.setAttributeNS(null, "stroke", this.stroke);
         this.cubicbezier.setAttributeNS(null,"stroke-width",this.stroke_width);
         this.cubicbezier.setAttributeNS(null, "fill",this.fill);
         this.cubicbezier.setAttributeNS(null, "fill-opacity", this.fill_opacity);
+        this.cubicbezier.setAttributeNS(null, "filter", "url(#"+this.filter_id+")");
         svg.appendChild(this.cubicbezier);
         return this;
     }
@@ -543,7 +546,7 @@ class cubicbezier{
 /////////////////////////////////////////////////////////////////////////
 
 class arc{
-    constructor(cx, cy, rx,ry, start_angle , end_angle, fill_type,fill, fill_opacity,stroke,stroke_width){
+    constructor(cx, cy, rx,ry, start_angle , end_angle, fill_type,fill, fill_opacity,stroke,stroke_width,filter_id) {
         this.cx=cx;
         this.cy=cy;
         this.rx=rx;
@@ -555,12 +558,14 @@ class arc{
         this.stroke_width=stroke_width;
         this.fill=fill;
         this.fill_opacity=fill_opacity;
+        this.filter_id = filter_id || "";
         this.arc=document.createElementNS("http://www.w3.org/2000/svg","path");
         this.arc.setAttributeNS(null,"d",this.dval(this.cx,this.cy,this.rx,this.ry,this.start,this.end,this.fill_type));
         this.arc.setAttributeNS(null,"stroke",this.stroke);
         this.arc.setAttributeNS(null,"stroke-width",this.stroke_width);
         this.arc.setAttributeNS(null,"fill",this.fill);
         this.arc.setAttributeNS(null,"fill-opacity",this.fill_opacity);
+        this.arc.setAttributeNS(null,"filter",`url(#${this.filter_id})`);
         svg.appendChild(this.arc);
         return this;
 
@@ -604,7 +609,7 @@ class arc{
 ///////////////////// TEXT ///////////////////////////////////////////////////
 
 class text{
-    constructor(x, y, inputtext, font_size, font_family, font_weight,stroke, stroke_width, fill, anchor="start") {
+    constructor(x, y, inputtext, font_size, font_family, font_weight,stroke, stroke_width, fill, anchor="start", filter_id) {
         this.x = x;
         this.y = y;
         this.inputtext = inputtext;
@@ -615,6 +620,7 @@ class text{
         this.stroke = stroke;
         this.stroke_width = stroke_width;
         this.anchor = anchor;
+        this.filter_id = filter_id || "";
         this.text = document.createElementNS("http://www.w3.org/2000/svg", "text");
         this.text.setAttributeNS(null, "x", this.x);
         this.text.setAttributeNS(null, "y", this.y);
@@ -625,6 +631,7 @@ class text{
         this.text.setAttributeNS(null, "text-anchor", this.anchor);
         this.text.setAttributeNS(null, "stroke", this.stroke);
         this.text.setAttributeNS(null, "stroke-width", this.stroke_width);
+        this.text.setAttributeNS(null, "filter", `url(#${this.filter_id})`);
         
         this.text.innerHTML = this.inputtext;
         svg.appendChild(this.text);
