@@ -11,21 +11,54 @@ t=0;
 
 
 
+pos={
+  x:w/2+100,
+  y:h/2,
+  vx: 3,
+  vy: 2,
+  r:30
+}
 
 
 function draw() {
 
-  // clearCanvas();
+  clearCanvas();
 
-  new arc(w/2,h/2,100,100,-3*PI/4-PI/2,PI/4,'open', "blue",0,'red',50);
+  new GaussianBlur('1 1','blur1');
 
-   t+=0.01;
+  new circle(pos.x,pos.y,pos.r,'#f0f',1,'#fff',1,'blur1');
 
- //  requestAnimationFrame(draw);
+  pos.x+=pos.vx;
+  pos.y+=pos.vy;
+
+  new rect(w/2-50,h/2-50,100,100,'#f0f',1,'#fff',1);
+
+  collision_wall(pos)
+
+  requestAnimationFrame(draw);
+
 }
-
 
 ///////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
 draw();
+
+
+
+function collision_wall(pos){
+  if(pos.x-pos.r<0){
+      pos.vx*=-1;
+  }
+  if(pos.x+pos.r>WIDTH){
+      pos.vx*=-1;
+  }
+  if(pos.y-pos.r<0){
+      pos.vy*=-1;
+  }
+  if(pos.y+pos.r>HEIGHT){
+      pos.vy*=-1;
+  }
+} 
+
+

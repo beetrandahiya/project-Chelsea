@@ -1,4 +1,9 @@
-
+/*
+Name : ChelseaJS
+License : MIT
+Author/ Creator : Prakrisht Dahiya
+Support the Creator : www.github.com/beetrandahiya   ,  https://www.buymeacoffee.com/beetran
+*/
 
 ///////////////////////////////////////////////////////////////////////
 /////////////// Basic functions //////////////////////////////////////
@@ -7,6 +12,9 @@ function setCanvas(element){
     svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     svg.setAttributeNS(null, "width", "100%");
     svg.setAttributeNS(null, "height", "100%");
+    //for definitions like filters
+    defs=document.createElementNS("http://www.w3.org/2000/svg", "defs");
+    svg.appendChild(defs);
     elem.appendChild(svg);
     WIDTH =svg.clientWidth;
     HEIGHT =svg.clientHeight;
@@ -86,7 +94,7 @@ function randomGaussian(mean, stdev) {
 ////////////////////// CIRCLE  ///////////////////////////////////////////////
 
 class circle {
-    constructor(cx, cy, r, fill,fill_opacity, stroke,stroke_width) {
+    constructor(cx, cy, r, fill,fill_opacity, stroke,stroke_width,filter_id) {
         this.cx = cx;
         this.cy = cy;
         this.r = r;
@@ -94,6 +102,7 @@ class circle {
         this.stroke = stroke;
         this.stroke_width = stroke_width;
         this.fill_opacity = fill_opacity;
+        this.filter_id = filter_id || "";
         this.circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
         this.circle.setAttributeNS(null, "cx", this.cx);
         this.circle.setAttributeNS(null, "cy", this.cy);
@@ -102,6 +111,7 @@ class circle {
         this.circle.setAttributeNS(null, "stroke", this.stroke);
         this.circle.setAttributeNS(null, "stroke-width", this.stroke_width);
         this.circle.setAttributeNS(null, "fill-opacity", this.fill_opacity); 
+        this.circle.setAttributeNS(null, "filter", "url(#"+this.filter_id+")");
         svg.appendChild(this.circle);
         return this;
     }
@@ -863,6 +873,8 @@ function clearCanvas() {
     while (svg.firstChild) {
         svg.removeChild(svg.lastChild);
     }
+    defs=document.createElementNS("http://www.w3.org/2000/svg", "defs");
+    svg.appendChild(defs);
 }
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -1285,3 +1297,19 @@ function HSLtoHex(h,s,l) {
 
 
 /////////////////////////////////////////////////////////////////
+/////////////////     Filters     ///////////////////////////////
+
+class GaussianBlur{
+    constructor(stdDev,id){
+        this.stdDev = stdDev;
+        this.id = id;
+        this.filterContainer= document.createElementNS("http://www.w3.org/2000/svg", "filter");
+        this.filterContainer.id = this.id;
+        this.filter= document.createElementNS("http://www.w3.org/2000/svg", "feGaussianBlur");
+        this.filter.setAttributeNS(null,"stdDeviation",this.stdDev);
+        this.filterContainer.appendChild(this.filter);
+        this.filterContainer.setAttributeNS(null,"filterUnits","userSpaceOnUse");
+        defs.appendChild(this.filterContainer);
+        return this.filterContainer;
+    }
+}

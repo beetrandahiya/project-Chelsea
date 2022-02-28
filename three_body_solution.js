@@ -57,14 +57,7 @@ function draw() {
   points1.push({x:x1,y:y1});
   points2.push({x:x2,y:y2});
   points3.push({x:x3,y:y3});
- // new line(x1,y1,x2,y2,'#fff');
- // new line(x1,y1,x3,y3,'#fff');
- // new line(x2,y2,x3,y3,'#fff');
-  //new line(x1,y1,(x1+x2+x3)/3,(y1+y2+y3)/3,'#fff');
-  //new line(x2,y2,(x1+x2+x3)/3,(y1+y2+y3)/3,'#fff');
-  //new line(x3,y3,(x1+x2+x3)/3,(y1+y2+y3)/3,'#fff');
-
-  
+ 
   if(points1.length>200)
   {
     points1.shift();
