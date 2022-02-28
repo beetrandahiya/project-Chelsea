@@ -1333,3 +1333,26 @@ class GaussianBlur{
         return this.filterContainer;
     }
 }
+
+class DropShadow{
+    constructor(dx,dy,blur,floodColor,floodOpacity,id){
+        this.dx=dx;
+        this.dy=dy;
+        this.blur=blur;
+        this.id=id;
+        this.floodColor=floodColor;
+        this.floodOpacity=floodOpacity;
+        this.filterContainer= document.createElementNS("http://www.w3.org/2000/svg", "filter");
+        this.filterContainer.id = this.id;
+        this.filter= document.createElementNS("http://www.w3.org/2000/svg", "feDropShadow");
+        this.filter.setAttributeNS(null,"dx",this.dx);
+        this.filter.setAttributeNS(null,"dy",this.dy);
+        this.filter.setAttributeNS(null,"stdDeviation",this.blur);
+        this.filter.setAttributeNS(null,"flood-color",this.floodColor);
+        this.filter.setAttributeNS(null,"flood-opacity",this.floodOpacity);
+        this.filterContainer.appendChild(this.filter);
+        this.filterContainer.setAttributeNS(null,"filterUnits","userSpaceOnUse");
+        defs.appendChild(this.filterContainer);
+        return this.filterContainer;
+    }
+}
