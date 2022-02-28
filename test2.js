@@ -22,7 +22,7 @@ pos={
 
 function draw() {
 
- // clearCanvas();
+  clearCanvas();
 
   new GaussianBlur('3','blur1');
   new DropShadow('10','10','10','#000000',1,'shadow1');
@@ -36,7 +36,7 @@ function draw() {
 
   collision_wall(pos)
 
- //requestAnimationFrame(draw);
+requestAnimationFrame(draw);
 
 }
 
