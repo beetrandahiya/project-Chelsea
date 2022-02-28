@@ -122,7 +122,7 @@ class circle {
 ////////////////////// ELLIPSE  ///////////////////////////////////////////////
 
 class ellipse{
-    constructor(cx, cy, rx, ry, fill,fill_opacity, stroke,stroke_width) {
+    constructor(cx, cy, rx, ry, fill,fill_opacity, stroke,stroke_width,filter_id) {
         this.cx = cx;
         this.cy = cy;
         this.rx = rx;
@@ -131,6 +131,7 @@ class ellipse{
         this.stroke = stroke;
         this.stroke_width = stroke_width;
         this.fill_opacity = fill_opacity;
+        this.filter_id = filter_id || "";
         this.ellipse = document.createElementNS("http://www.w3.org/2000/svg", "ellipse");
         this.ellipse.setAttributeNS(null, "cx", this.cx);
         this.ellipse.setAttributeNS(null, "cy", this.cy);
@@ -140,6 +141,7 @@ class ellipse{
         this.ellipse.setAttributeNS(null, "stroke", this.stroke);
         this.ellipse.setAttributeNS(null, "stroke-width", this.stroke_width);
         this.ellipse.setAttributeNS(null, "fill-opacity", this.fill_opacity);
+        this.ellipse.setAttributeNS(null, "filter", "url(#"+this.filter_id+")");
         svg.appendChild(this.ellipse);
         return this;
     }
@@ -152,7 +154,7 @@ class ellipse{
 
 
 class rect{
-    constructor(x, y, width, height, fill,fill_opacity, stroke,stroke_width, anchor="top-left", border_radius=0) {
+    constructor(x, y, width, height, fill,fill_opacity, stroke,stroke_width, anchor="top-left", border_radius=0, filter_id) {
     
         this.x=x;
         this.y=y;
@@ -164,6 +166,7 @@ class rect{
         this.fill_opacity=fill_opacity;
         this.anchor=anchor;
         this.border_radius=border_radius;
+        this.filter_id = filter_id || "";
         this.rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
         this.rect.setAttributeNS(null, "fill", this.fill);
         this.rect.setAttributeNS(null, "stroke", this.stroke);
@@ -171,6 +174,7 @@ class rect{
         this.rect.setAttributeNS(null, "fill-opacity", this.fill_opacity);
         this.rect.setAttributeNS(null, "rx", this.border_radius);
         this.rect.setAttributeNS(null, "ry", this.border_radius);
+        this.rect.setAttributeNS(null,"filter","url(#"+this.filter_id+")");
         switch(anchor){
             case "center":
                 this.rect.setAttributeNS(null, "x", this.x-this.width/2);
@@ -214,17 +218,19 @@ class rect{
 ////////////////////// POINT  ///////////////////////////////////////////////
 
 class point{
-    constructor(x, y, stroke,stroke_width) {
+    constructor(x, y, stroke,stroke_width,filter_id) {
         this.x = x;
         this.y = y;
         this.stroke = stroke;
         this.stroke_width = stroke_width;
+        this.filter_id = filter_id || "";
         this.point = document.createElementNS("http://www.w3.org/2000/svg", "circle");
         this.point.setAttributeNS(null, "cx", this.x);
         this.point.setAttributeNS(null, "cy", this.y);
         this.point.setAttributeNS(null, "r", this.stroke_width/2);
         this.point.setAttributeNS(null, "stroke", this.stroke);
         this.point.setAttributeNS(null, "stroke-width", this.stroke_width);
+        this.point.setAttributeNS(null, "filter", "url(#"+this.filter_id+")");
         svg.appendChild(this.point);
         return this;
     }
@@ -235,7 +241,7 @@ class point{
 ////////////////////// LINE  ///////////////////////////////////////////////
 
 class line{
-    constructor(x1, y1, x2, y2, stroke,stroke_width, linecap="butt", dasharray="") {
+    constructor(x1, y1, x2, y2, stroke,stroke_width, linecap="butt", dasharray="", filter_id) {
 
         this.x1 = x1;
         this.y1 = y1;
@@ -245,6 +251,7 @@ class line{
         this.stroke_width = stroke_width;
         this.dasharray = dasharray;
         this.linecap = linecap;
+        this.filter_id = filter_id || "";
         this.line = document.createElementNS("http://www.w3.org/2000/svg", "line");
         this.line.setAttributeNS(null, "x1", this.x1);
         this.line.setAttributeNS(null, "y1", this.y1);
@@ -254,6 +261,7 @@ class line{
         this.line.setAttributeNS(null, "stroke-width", this.stroke_width);
         this.line.setAttributeNS(null, "stroke-dasharray", this.dasharray);
         this.line.setAttributeNS(null, "stroke-linecap", this.linecap);
+        this.line.setAttributeNS(null, "filter", "url(#"+this.filter_id+")");
         svg.appendChild(this.line);
         return this;
 
@@ -266,7 +274,7 @@ class line{
 ///////////////////// REGULAR POLYGON ///////////////////////////////////////////////////
 
 class regpolygon{
-    constructor(x,y,radius,sides,rotation,fill,fill_opacity,stroke,stroke_width) {
+    constructor(x,y,radius,sides,rotation,fill,fill_opacity,stroke,stroke_width,filter_id) {
         this.x = x;
         this.y = y;
         this.radius = radius;
@@ -276,13 +284,14 @@ class regpolygon{
         this.stroke_width = stroke_width;
         this.fill = fill;
         this.fill_opacity = fill_opacity;
-        
+        this.filter_id = filter_id || "";
         this.regpolygon = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
         this.regpolygon.setAttributeNS(null, "points", this.points());
         this.regpolygon.setAttributeNS(null, "stroke", this.stroke);
         this.regpolygon.setAttributeNS(null, "stroke-width", this.stroke_width);
         this.regpolygon.setAttributeNS(null, "fill", this.fill);
         this.regpolygon.setAttributeNS(null, "fill-opacity", this.fill_opacity);
+        this.regpolygon.setAttributeNS(null, "filter", "url(#"+this.filter_id+")");
         svg.appendChild(this.regpolygon);
         return this;
         
@@ -306,7 +315,7 @@ class regpolygon{
 ///////////////////////////////////////////////////////////////////////////////
 
 class star{
-    constructor(x,y,outer_radius,inner_radius,sides,rotation,fill,fill_opacity,stroke,stroke_width) {
+    constructor(x,y,outer_radius,inner_radius,sides,rotation,fill,fill_opacity,stroke,stroke_width,filter_id) {
         this.x=x;
         this.y=y;
         this.outer_radius=outer_radius;
@@ -317,13 +326,14 @@ class star{
         this.stroke_width=stroke_width;
         this.fill=fill;
         this.fill_opacity=fill_opacity;
-
+        this.filter_id = filter_id || "";
         this.star=document.createElementNS("http://www.w3.org/2000/svg", "polygon");
         this.star.setAttributeNS(null, "points", this.points());
         this.star.setAttributeNS(null, "stroke", this.stroke);
         this.star.setAttributeNS(null, "stroke-width", this.stroke_width);
         this.star.setAttributeNS(null, "fill", this.fill);
         this.star.setAttributeNS(null, "fill-opacity", this.fill_opacity);
+        this.star.setAttributeNS(null, "filter", "url(#"+this.filter_id+")");
         svg.appendChild(this.star);
         return this;
 
@@ -352,20 +362,21 @@ class star{
 
 
 class polygon{
-    constructor(inppoints,fill , fill_opacity,stroke,stroke_width,close=false){
+    constructor(inppoints,fill , fill_opacity,stroke,stroke_width,close=false,filter_id) {
         this.inppoints=inppoints;
         this.stroke= stroke;
         this.stroke_width = stroke_width;
         this.fill = fill;
         this.fill_opacity = fill_opacity;
         this.close = close;
-        
+        this.filter_id = filter_id || "";
         this.polygon = document.createElementNS("http://www.w3.org/2000/svg","path");
         this.polygon.setAttributeNS(null, "d",this.pathd());    
         this.polygon.setAttributeNS(null, "stroke", this.stroke);
         this.polygon.setAttributeNS(null,"stroke-width",this.stroke_width);
         this.polygon.setAttributeNS(null, "fill",this.fill);
         this.polygon.setAttributeNS(null, "fill-opacity", this.fill_opacity);
+        this.polygon.setAttributeNS(null, "filter", "url(#"+this.filter_id+")");
         svg.appendChild(this.polygon);
         return this;
     }
@@ -390,7 +401,7 @@ class polygon{
 
 
 class twoPointCubicBezier{
-    constructor(x1,y1,xc1,yc1,x2,y2,xc2,yc2,fill,fill_opacity,stroke,stroke_width){
+    constructor(x1,y1,xc1,yc1,x2,y2,xc2,yc2,fill,fill_opacity,stroke,stroke_width, filter_id){
         this.x1=x1;
         this.y1=y1;
         this.xc1=xc1;
@@ -403,6 +414,7 @@ class twoPointCubicBezier{
         this.stroke_width=stroke_width;
         this.fill=fill;
         this.fill_opacity=fill_opacity;
+        this.filter_id = filter_id || "";
 
         this.twoPointCubicBezier = document.createElementNS("http://www.w3.org/2000/svg","path");
         this.twoPointCubicBezier.setAttributeNS(null, "d",`M ${this.x1},${this.y1} C ${this.xc1},${this.yc1} ${this.xc2},${this.yc2} ${this.x2},${this.y2}`);
@@ -410,6 +422,7 @@ class twoPointCubicBezier{
         this.twoPointCubicBezier.setAttributeNS(null,"stroke-width",this.stroke_width);
         this.twoPointCubicBezier.setAttributeNS(null, "fill",this.fill);
         this.twoPointCubicBezier.setAttributeNS(null, "fill-opacity", this.fill_opacity);
+        this.twoPointCubicBezier.setAttributeNS(null, "filter", "url(#"+this.filter_id+")");
         svg.appendChild(this.twoPointCubicBezier);
         return this;
 
