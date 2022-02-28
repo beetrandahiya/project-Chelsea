@@ -24,14 +24,14 @@ function draw() {
 
   clearCanvas();
 
-  new GaussianBlur('1 1','blur1');
+  new GaussianBlur('3','blur1');
 
-  new circle(pos.x,pos.y,pos.r,'#f0f',1,'#fff',1,'blur1');
+  new circle(pos.x,pos.y,pos.r,'#f0f',1,'#fff',0,'blur1');
 
   pos.x+=pos.vx;
   pos.y+=pos.vy;
 
-  new rect(w/2-50,h/2-50,100,100,'#f0f',1,'#fff',1);
+ // new rect(w/2-50,h/2-50,100,100,'#f0f',1,'#fff',1);
 
   collision_wall(pos)
 
