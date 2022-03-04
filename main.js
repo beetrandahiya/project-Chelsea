@@ -111,7 +111,8 @@ class circle {
         this.circle.setAttributeNS(null, "stroke", this.stroke);
         this.circle.setAttributeNS(null, "stroke-width", this.stroke_width);
         this.circle.setAttributeNS(null, "fill-opacity", this.fill_opacity); 
-        this.circle.setAttributeNS(null, "filter", "url(#"+this.filter_id+")");
+        if(filter_id){
+        this.circle.setAttributeNS(null, "filter", "url(#"+this.filter_id+")");}
         svg.appendChild(this.circle);
         return this;
     }
@@ -141,7 +142,8 @@ class ellipse{
         this.ellipse.setAttributeNS(null, "stroke", this.stroke);
         this.ellipse.setAttributeNS(null, "stroke-width", this.stroke_width);
         this.ellipse.setAttributeNS(null, "fill-opacity", this.fill_opacity);
-        this.ellipse.setAttributeNS(null, "filter", "url(#"+this.filter_id+")");
+        if(filter_id){
+        this.ellipse.setAttributeNS(null, "filter", "url(#"+this.filter_id+")");}
         svg.appendChild(this.ellipse);
         return this;
     }
@@ -174,7 +176,8 @@ class rect{
         this.rect.setAttributeNS(null, "fill-opacity", this.fill_opacity);
         this.rect.setAttributeNS(null, "rx", this.border_radius);
         this.rect.setAttributeNS(null, "ry", this.border_radius);
-        this.rect.setAttributeNS(null,"filter","url(#"+this.filter_id+")");
+        if(filter_id){
+        this.rect.setAttributeNS(null,"filter","url(#"+this.filter_id+")");}
         switch(anchor){
             case "center":
                 this.rect.setAttributeNS(null, "x", this.x-this.width/2);
@@ -230,7 +233,8 @@ class point{
         this.point.setAttributeNS(null, "r", this.stroke_width/2);
         this.point.setAttributeNS(null, "stroke", this.stroke);
         this.point.setAttributeNS(null, "stroke-width", this.stroke_width);
-        this.point.setAttributeNS(null, "filter", "url(#"+this.filter_id+")");
+        if(this.filter_id){
+        this.point.setAttributeNS(null, "filter", "url(#"+this.filter_id+")");}
         svg.appendChild(this.point);
         return this;
     }
@@ -261,7 +265,8 @@ class line{
         this.line.setAttributeNS(null, "stroke-width", this.stroke_width);
         this.line.setAttributeNS(null, "stroke-dasharray", this.dasharray);
         this.line.setAttributeNS(null, "stroke-linecap", this.linecap);
-        this.line.setAttributeNS(null, "filter", "url(#"+this.filter_id+")");
+        if(this.filter_id){
+       this.line.setAttributeNS(null, "filter", "url(#"+this.filter_id+")");}
         svg.appendChild(this.line);
         return this;
 
@@ -291,7 +296,8 @@ class regpolygon{
         this.regpolygon.setAttributeNS(null, "stroke-width", this.stroke_width);
         this.regpolygon.setAttributeNS(null, "fill", this.fill);
         this.regpolygon.setAttributeNS(null, "fill-opacity", this.fill_opacity);
-        this.regpolygon.setAttributeNS(null, "filter", "url(#"+this.filter_id+")");
+        if(this.filter_id){
+        this.regpolygon.setAttributeNS(null, "filter", "url(#"+this.filter_id+")");}
         svg.appendChild(this.regpolygon);
         return this;
         
@@ -333,7 +339,8 @@ class star{
         this.star.setAttributeNS(null, "stroke-width", this.stroke_width);
         this.star.setAttributeNS(null, "fill", this.fill);
         this.star.setAttributeNS(null, "fill-opacity", this.fill_opacity);
-        this.star.setAttributeNS(null, "filter", "url(#"+this.filter_id+")");
+        if(this.filter_id){
+        this.star.setAttributeNS(null, "filter", "url(#"+this.filter_id+")");}
         svg.appendChild(this.star);
         return this;
 
@@ -376,7 +383,8 @@ class polygon{
         this.polygon.setAttributeNS(null,"stroke-width",this.stroke_width);
         this.polygon.setAttributeNS(null, "fill",this.fill);
         this.polygon.setAttributeNS(null, "fill-opacity", this.fill_opacity);
-        this.polygon.setAttributeNS(null, "filter", "url(#"+this.filter_id+")");
+        if(filter_id){
+        this.polygon.setAttributeNS(null, "filter", "url(#"+this.filter_id+")");}
         svg.appendChild(this.polygon);
         return this;
     }
@@ -422,7 +430,8 @@ class twoPointCubicBezier{
         this.twoPointCubicBezier.setAttributeNS(null,"stroke-width",this.stroke_width);
         this.twoPointCubicBezier.setAttributeNS(null, "fill",this.fill);
         this.twoPointCubicBezier.setAttributeNS(null, "fill-opacity", this.fill_opacity);
-        this.twoPointCubicBezier.setAttributeNS(null, "filter", "url(#"+this.filter_id+")");
+        if(filter_id){
+        this.twoPointCubicBezier.setAttributeNS(null, "filter", "url(#"+this.filter_id+")");}
         svg.appendChild(this.twoPointCubicBezier);
         return this;
 
@@ -455,7 +464,8 @@ class twoPointQuadraticBezier{
         this.twoPointQuadraticBezier.setAttributeNS(null,"stroke-width",this.stroke_width);
         this.twoPointQuadraticBezier.setAttributeNS(null, "fill",this.fill);
         this.twoPointQuadraticBezier.setAttributeNS(null, "fill-opacity", this.fill_opacity);
-        this.twoPointQuadraticBezier.setAttributeNS(null, "filter", "url(#"+this.filter_id+")");
+        if(filter_id){
+        this.twoPointQuadraticBezier.setAttributeNS(null, "filter", "url(#"+this.filter_id+")");}
         svg.appendChild(this.twoPointQuadraticBezier);
         return this;
 
@@ -484,7 +494,8 @@ class cubicbezier{
         this.cubicbezier.setAttributeNS(null,"stroke-width",this.stroke_width);
         this.cubicbezier.setAttributeNS(null, "fill",this.fill);
         this.cubicbezier.setAttributeNS(null, "fill-opacity", this.fill_opacity);
-        this.cubicbezier.setAttributeNS(null, "filter", "url(#"+this.filter_id+")");
+        if(filter_id){
+        this.cubicbezier.setAttributeNS(null, "filter", "url(#"+this.filter_id+")");}
         svg.appendChild(this.cubicbezier);
         return this;
     }
@@ -565,7 +576,8 @@ class arc{
         this.arc.setAttributeNS(null,"stroke-width",this.stroke_width);
         this.arc.setAttributeNS(null,"fill",this.fill);
         this.arc.setAttributeNS(null,"fill-opacity",this.fill_opacity);
-        this.arc.setAttributeNS(null,"filter",`url(#${this.filter_id})`);
+        if(filter_id){
+        this.arc.setAttributeNS(null,"filter",`url(#${this.filter_id})`);}
         svg.appendChild(this.arc);
         return this;
 
@@ -631,7 +643,8 @@ class text{
         this.text.setAttributeNS(null, "text-anchor", this.anchor);
         this.text.setAttributeNS(null, "stroke", this.stroke);
         this.text.setAttributeNS(null, "stroke-width", this.stroke_width);
-        this.text.setAttributeNS(null, "filter", `url(#${this.filter_id})`);
+        if (filter_id) {
+        this.text.setAttributeNS(null, "filter", `url(#${this.filter_id})`);}
         
         this.text.innerHTML = this.inputtext;
         svg.appendChild(this.text);

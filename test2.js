@@ -25,7 +25,6 @@ function draw() {
   clearCanvas();
 
   new GaussianBlur('3','blur1');
-  new DropShadow('10','10','10','#000000',1,'shadow1');
 
   new circle(pos.x,pos.y,pos.r,'#f0f',1,'#fff',0,'shadow1');
 

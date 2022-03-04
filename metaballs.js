@@ -69,7 +69,7 @@ function draw() {
             d+=1/dist(pos1.x,pos1.y,i,j);
             d=9/d;
             d=clamp(d,200,360);
-            if(d<280){
+            if(d<280 && d>200){
          new rect(i,j,ii,ii,`hsl(${d},100%,50%)`,1,`hsl(${d},100%,50%)`,1);}}
       }
       //new circle(pos.x,pos.y,pos.r,'red',1,'#ff0',2);
