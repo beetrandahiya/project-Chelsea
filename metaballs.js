@@ -73,7 +73,6 @@ function draw() {
          new rect(i,j,ii,ii,`hsl(${d},100%,50%)`,1,`hsl(${d},100%,50%)`,1);}}
       }
       //new circle(pos.x,pos.y,pos.r,'red',1,'#ff0',2);
-
       
  t+=0.01;
  requestAnimationFrame(draw);
