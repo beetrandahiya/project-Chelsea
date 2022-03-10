@@ -1370,3 +1370,9 @@ class DropShadow{
     }
 }
 
+class Glow{
+    constructor(stdDev,id){
+        
+    }
+}
+
