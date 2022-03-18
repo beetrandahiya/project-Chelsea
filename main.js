@@ -1372,6 +1372,26 @@ class DropShadow{
 
 class Glow{
     constructor(stdDev,id){
+
+        this.stdDev = stdDev;
+        this.id = id;
+        this.filterContainer= document.createElementNS("http://www.w3.org/2000/svg", "filter"); 
+        this.filterContainer.id = this.id;
+        this.filter= document.createElementNS("http://www.w3.org/2000/svg", "feGaussianBlur");
+        this.filter.setAttributeNS(null,"stdDeviation",this.stdDev);
+        this.filter.setAttributeNS(null,"result","coloredBlur");
+        this.filterContainer.appendChild(this.filter);
+        this.femerge= document.createElementNS("http://www.w3.org/2000/svg", "feMerge");
+        this.coloredBlur= document.createElementNS("http://www.w3.org/2000/svg", "feMergeNode");
+        this.coloredBlur.setAttributeNS(null,"in","coloredBlur");
+        this.sourceGraphic= document.createElementNS("http://www.w3.org/2000/svg", "feMergeNode");
+        this.sourceGraphic.setAttributeNS(null,"in","SourceGraphic");
+        this.femerge.appendChild(this.coloredBlur);
+        this.femerge.appendChild(this.sourceGraphic);
+        this.filterContainer.appendChild(this.femerge);
+        this.filterContainer.setAttributeNS(null,"filterUnits","userSpaceOnUse");
+        defs.appendChild(this.filterContainer);
+        return this.filterContainer;
         
     }
 }

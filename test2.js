@@ -20,11 +20,12 @@ t=random(0,360);
 function draw() {
 
   clearCanvas();
+  new Glow(3,'glow');
 
   for (i = 0; i < arr.length; i++) {
     for (j = 0; j < arr[i].length; j++) {
       if (arr[i][j]) {
-        new rect(i * 10, j * 10, 10, 10, `hsl(${t},100%,50%)`, 1, `hsl(${t},100%,50%)`, 1);
+        new rect(i * 10, j * 10, 10, 10, `hsl(${t},100%,50%)`, 1, `hsl(${t},100%,50%)`, 1,'top-left',0,'glow');
         arr[i][j]=conway_outcome(arr,i,j);
       }
       else{
