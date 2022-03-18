@@ -8,7 +8,7 @@ h = HEIGHT;
 t = 0;
 
 var arr = [];
-n=60
+n=50
 for (i = 0; i < n; i++) {
   arr[i] = [];
   for (j = 0; j < n; j++) {
@@ -24,7 +24,7 @@ function draw() {
   for (i = 0; i < arr.length; i++) {
     for (j = 0; j < arr[i].length; j++) {
       if (arr[i][j]) {
-        new rect(i * 10, j * 10, 10, 10, `hsl(${t},100%,50%)`, 1, '#000', 1);
+        new rect(i * 10, j * 10, 10, 10, `hsl(${t},100%,50%)`, 1, `hsl(${t},100%,50%)`, 1);
         arr[i][j]=conway_outcome(arr,i,j);
       }
       else{
@@ -35,7 +35,7 @@ function draw() {
 
 
 
-  t+=0.1;
+  t+=0.4;
   requestAnimationFrame(draw);
 
 }
@@ -48,7 +48,7 @@ draw();
 function conway_outcome(space,cx,cy) {
 
   n=0; //no. of neighboring cells alive
-  if(cx>1 && cy>1 && cx<59 && cy<59){
+  if(cx>1 && cy>1 && cx<49 && cy<49){
   n= space[cx-1][cy-1]+space[cx][cy-1]+space[cx+1][cy-1]+space[cx-1][cy]+space[cx+1][cy]+space[cx-1][cy+1]+space[cx][cy+1]+space[cx+1][cy+1];
   }
 //  console.log(n);
