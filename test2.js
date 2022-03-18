@@ -8,12 +8,14 @@ h = HEIGHT;
 t = 0;
 
 var arr = [];
-for (i = 0; i < 50; i++) {
+n=60
+for (i = 0; i < n; i++) {
   arr[i] = [];
-  for (j = 0; j < 50; j++) {
+  for (j = 0; j < n; j++) {
     arr[i][j] = randomBool();
   }
 }
+t=random(0,360);
 
 function draw() {
 
@@ -22,7 +24,10 @@ function draw() {
   for (i = 0; i < arr.length; i++) {
     for (j = 0; j < arr[i].length; j++) {
       if (arr[i][j]) {
-        new rect(i * 10, j * 10, 10, 10, '#f0f', 1, '#000', 0);
+        new rect(i * 10, j * 10, 10, 10, `hsl(${t},100%,50%)`, 1, '#000', 1);
+        arr[i][j]=conway_outcome(arr,i,j);
+      }
+      else{
         arr[i][j]=conway_outcome(arr,i,j);
       }
     }
@@ -30,6 +35,7 @@ function draw() {
 
 
 
+  t+=0.1;
   requestAnimationFrame(draw);
 
 }
@@ -42,33 +48,7 @@ draw();
 function conway_outcome(space,cx,cy) {
 
   n=0; //no. of neighboring cells alive
-
-  if(cx==0 && cy==0){
-    n=space[cx][cy+1]+space[cx+1][cy]+space[cx+1][cy+1];
-  }
-  else if(cx==0 && cy==49){
-    n=space[cx][cy-1]+space[cx+1][cy-1]+space[cx+1][cy];
-  }
-  else if(cx==49 && cy==0){
-    n=space[cx-1][cy]+space[cx-1][cy+1]+space[cx][cy+1];
-  }
-  else if(cx==49 && cy==49){
-    n=space[cx-1][cy]+space[cx-1][cy-1]+space[cx][cy-1];
-  }
-  else if(cx==0){
-    n=space[cx][cy-1]+space[cx][cy+1]+space[cx+1][cy-1]+space[cx+1][cy]+space[cx+1][cy+1];
-  }
-  else if(cy==0){
-    n=space[cx-1][cy]+space[cx-1][cy+1]+space[cx][cy+1]+space[cx+1][cy]+space[cx+1][cy+1];
-  }
-  else if(cx==49){
-    n=space[cx][cy-1]+space[cx][cy+1]+space[cx-1][cy-1]+space[cx-1][cy]+space[cx-1][cy+1];
-  }
-  else if(cy==49){
-    n=space[cx-1][cy]+space[cx-1][cy-1]+space[cx][cy-1]+space[cx+1][cy]+space[cx+1][cy-1];
-  }
-  else{
-
+  if(cx>1 && cy>1 && cx<59 && cy<59){
   n= space[cx-1][cy-1]+space[cx][cy-1]+space[cx+1][cy-1]+space[cx-1][cy]+space[cx+1][cy]+space[cx-1][cy+1]+space[cx][cy+1]+space[cx+1][cy+1];
   }
 //  console.log(n);
