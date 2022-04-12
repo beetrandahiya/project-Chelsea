@@ -52,7 +52,7 @@ w = WIDTH;
 h = HEIGHT;
 
 
-n=300;
+n=200;
 poss=[]
 for(ix=0;ix<n;ix++){
   pos={
@@ -66,8 +66,8 @@ for(ix=0;ix<n;ix++){
 };
 
 t=0
-v1=-2*PI;
-v2=2*PI;
+v1=-4*PI;
+v2=4*PI;
 function draw() {
 
    clearCanvas();
@@ -103,21 +103,22 @@ function draw() {
   }
   
 */
+
   for(i=0;i<n;i++){
     pos=poss[i]
     xp=mapRange(pos.x,0,w,v1,v2);
     yp=mapRange(pos.y,0,h,v1,v2);
-    g=sin(yp);   //horizontal component
-    f=cos(xp);    //vertical component 
+    g=-2*floor(xp)%2+1;  //horizontal component
+    f=-2*floor(yp)%2+1;    //vertical component 
     th= atan(f/g);
     //console.log(th)
     ic=mapRange(cos(th),-1,1,230,300);
     ic=`hsla(${ic},100%,50%,1)`;
-    new point(pos.x,pos.y,ic,2,false);
+    new point(pos.x,pos.y,ic,2);
     pos.x+=g;
     pos.y+=f;
     pos.past.push([pos.x,pos.y]);
-    if(pos.past.length>50){
+    if(pos.past.length>100){
       pos.past.shift();
     }
     new polygon(pos.past,'none',0,ic,1,false);
