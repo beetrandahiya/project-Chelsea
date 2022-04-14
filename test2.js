@@ -54,6 +54,7 @@ h = HEIGHT;
 
 n=200;
 poss=[]
+function makepoints(){
 for(ix=0;ix<n;ix++){
   pos={
   x:random(0,w),
@@ -61,11 +62,14 @@ for(ix=0;ix<n;ix++){
   vx:0,
   vy:0,
   past:[],
+  lt:1,
   };
   poss.push(pos);
 };
+};
+makepoints();
 
-t=0
+t=0;
 v1=-4*PI;
 v2=4*PI;
 function draw() {
@@ -105,25 +109,33 @@ function draw() {
 */
 
   for(i=0;i<n;i++){
+
     pos=poss[i]
     xp=mapRange(pos.x,0,w,v1,v2);
     yp=mapRange(pos.y,0,h,v1,v2);
-    g=-2*floor(xp)%2+1;  //horizontal component
-    f=-2*floor(yp)%2+1;    //vertical component 
+    g=yp;  //horizontal component
+    f=-yp-(4.9)*sin(xp);    //vertical component 
     th= atan(f/g);
     //console.log(th)
     ic=mapRange(cos(th),-1,1,230,300);
-    ic=`hsla(${ic},100%,50%,1)`;
+    ic=`hsla(${ic},100%,50%,${pos.lt})`;
     new point(pos.x,pos.y,ic,2);
     pos.x+=g;
     pos.y+=f;
+    
     pos.past.push([pos.x,pos.y]);
-    if(pos.past.length>100){
+    if(pos.past.length>80){
       pos.past.shift();
     }
     new polygon(pos.past,'none',0,ic,1,false);
-  }
 
+  }
+  if(t>poss[0].lt){
+    poss=[];
+    makepoints();
+    t=0;
+  }
+  t+=0.01;
    requestAnimationFrame(draw);
 
 }
