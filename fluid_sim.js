@@ -46,11 +46,12 @@ function draw() {
    simulate(0.1);
    for(i=1;i<N;i++){
          for(j=1;j<N;j++){
-             c=`hsl(${dens[IX(i,j)]},100%,50%)`;
+             val=sqrt(u[IX(i,j)]*u[IX(i,j)]+v[IX(i,j)]*v[IX(i,j)]);
+             c=`hsl(${mapRange(val,0,0.0001,0,360)},100%,50%)`;
              new rect(i,j,ii,ii,c,1,"#fff",0);
          }
    }
-   t += 0.1;
+  
    requestAnimationFrame(draw);
 
 

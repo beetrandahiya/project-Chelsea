@@ -1,4 +1,4 @@
-N=100;
+N=50;
 const size=(N+2)*(N+2);
 
 u=new Array(size).fill(0);
@@ -152,9 +152,9 @@ function simulate( dt){
     var t=0;
     diff=0.5;
     visc=0.5;
-    addDensity(dens,dens_prev,0.5);
-    addVelocity(u,v,u_prev,v_prev,0.5);
     get_input();
+    addDensity(dens,dens_prev,0.5*dt);
+    addVelocity(u,v,u_prev,v_prev,0.5*dt);
     dens_step(dens,dens_prev,u,v,diff,dt);
     vel_step(u,v,u_prev,v_prev,visc,dt);
     t+=dt;
@@ -162,13 +162,14 @@ function simulate( dt){
 
 function get_input(){
         //get mouse position
-        fetch_mouse_pos(document.getElementById("container"),"click");
-        var x = mousepos.x;
-        var y = mousepos.y;
-        var i = Math.floor(x/N);
-        var j = Math.floor(y/N);
-        u[IX(i,j)] = -1;
-        v[IX(i,j)] = -1;
+        fetch_mouse_pos(document.getElementById("container"),"mousemove");
+        var x = floor(mousepos.x);
+        var y = floor(mousepos.y);
+        u[IX(x,y)] = +1;
+        v[IX(x,y)] = +1;
+        addDensity(dens,dens_prev,0.5);
+    addVelocity(u,v,u_prev,v_prev,0.5);
+      //console.log(x,y);
 }
 
-simulate(0.1);
+simulate(1);
