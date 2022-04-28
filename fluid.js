@@ -1,13 +1,13 @@
 N=100;
 const size=(N+2)*(N+2);
 
-u=new Array(size);
-v=new Array(size);
-u_prev=new Array(size);
-v_prev=new Array(size);
+u=new Array(size).fill(0);
+v=new Array(size).fill(0);
+u_prev=new Array(size).fill(0);
+v_prev=new Array(size).fill(0);
 
-dens=new Array(size);
-dens_prev=new Array(size);
+dens=new Array(size).fill(0);
+dens_prev=new Array(size).fill(0);
 
 function IX(i,j){
     return i + (N+2)*j;
@@ -127,11 +127,48 @@ function set_bnd(b,x){
     x[IX(N+1,N+1)]=0.5*(x[IX(N,N+1)]+x[IX(N+1,N)]);
 }
 
-function simulate(T, dt){
-    while(t<=T){
-        dens_step(dens,dens_prev,u,v,diff,dt);
-        vel_step(u,v,u_prev,v_prev,visc,dt);
-        t+=dt;
+function addDensity(x,x0,dt){
+    for(i=1;i<=N;i++){
+        for(j=1;j<=N;j++){
+            x[IX(i,j)]+=dt*x0[IX(i,j)];
+        }
     }
-    console.log(u);
+    set_bnd(N,x);
 }
+
+function addVelocity(u,v,u0,v0,dt){
+    for(i=1;i<=N;i++){
+        for(j=1;j<=N;j++){
+            u[IX(i,j)]+=dt*u0[IX(i,j)];
+            v[IX(i,j)]+=dt*v0[IX(i,j)];
+        }
+    }
+    set_bnd(1,u);
+    set_bnd(2,v);
+}
+
+
+function simulate( dt){
+    var t=0;
+    diff=0.5;
+    visc=0.5;
+    addDensity(dens,dens_prev,0.5);
+    addVelocity(u,v,u_prev,v_prev,0.5);
+    get_input();
+    dens_step(dens,dens_prev,u,v,diff,dt);
+    vel_step(u,v,u_prev,v_prev,visc,dt);
+    t+=dt;
+}
+
+function get_input(){
+        //get mouse position
+        fetch_mouse_pos(document.getElementById("container"),"click");
+        var x = mousepos.x;
+        var y = mousepos.y;
+        var i = Math.floor(x/N);
+        var j = Math.floor(y/N);
+        u[IX(i,j)] = -1;
+        v[IX(i,j)] = -1;
+}
+
+simulate(0.1);
