@@ -156,6 +156,7 @@ for(i=0;i<w/ii;i++){
 function draw() {
 
    clearCanvas();
+   
    for(i=0;i<densities.length;i++){
          for(j=0;j<densities[i].length;j++){
              vc=mapRange(densities[i][j],0,1,0,255);
