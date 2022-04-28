@@ -19,11 +19,19 @@ c = 1;
 function eqn(x, y) {
    x=x-w/2;
    y=y-h/2;
-   x=x/30;
-   y=y/30;
+   x=x/20;
+   y=-y/20;
 
-   return y*cos(y+x+x**2)-x**3;
-  // return 8*((x**2) + (y**2))**2 - 25*((x**2)-(y**2));
+   return y*cos(y+x+x**2+t)-x**3;
+   //return 2*((x**2) + (y**2))**2 - 15*((x**2)-(y**2));
+   //return sin(sin(x)+cos(y))-cos(sin(x*y)+cos(x))+cos(t);
+  /*
+  thumping heart
+
+   thump=cos(1.5*t/5)*sin(6*t/5)+1.5;
+   return x**2 +(-y-sqrt(abs(x)))**2-2*thump;
+   */
+
 }
 
 
@@ -117,7 +125,7 @@ function draw() {
 
   
 
-   t += 0.1;
+   t -= 0.1;
  //requestAnimationFrame(draw);
 
 
