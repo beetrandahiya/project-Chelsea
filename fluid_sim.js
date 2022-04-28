@@ -9,8 +9,6 @@ i = 0;
 
 
 ii = 5 ;
-c = 1;
-N=w/ii;
 
 
 function gauss_seidel(A,x=[0,0,0],B){
@@ -45,10 +43,15 @@ for(m=0;m<25;m++){
 function draw() {
 
    clearCanvas();
-   
-
+   simulate(0.1);
+   for(i=1;i<N;i++){
+         for(j=1;j<N;j++){
+             c=`hsl(${dens[IX(i,j)]},100%,50%)`;
+             new rect(i,j,ii,ii,c,1,"#fff",0);
+         }
+   }
    t += 0.1;
- //requestAnimationFrame(draw);
+   requestAnimationFrame(draw);
 
 
 }
