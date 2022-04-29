@@ -12,7 +12,6 @@ dens_prev=new Array(size).fill(0);
 function IX(i,j){
     return i + (N+2)*j;
 }
-
 function add_source(x,s,dt){
     for(i=0;i<size;i++){
         x[i]+=dt*s[i];
