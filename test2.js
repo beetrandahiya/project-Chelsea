@@ -1,4 +1,83 @@
 
+//ray casting
+
+//boundary
+
+class Boundary{
+  constructor(x1,y1,x2,y2){
+    this.a=createVector(x1,y1);
+    this.b=createVector(x2,y2);
+  }
+
+  show(){
+    new line(this.a.x,this.a.y,this.b.x,this.b.y,"#f8f",2);
+  }
+}
+
+
+//ray
+
+class Ray{
+  constructor(x,y,angle){
+    this.pos=createVector(x,y);
+    this.angle=angle;
+  }
+  cast(boundary){
+    var x1=boundary.a.x;
+    var y1=boundary.a.y;
+    var x2=boundary.b.x;
+    var y2=boundary.b.y;
+
+    var x3=this.pos.x;
+    var y3=this.pos.y;
+    var x4=this.pos.x+cos(this.angle)*100;
+    var y4=this.pos.y-sin(this.angle)*100;
+
+    var den=(x1-x2)*(y3-y4)-(y1-y2)*(x3-x4);
+    if(den==0) return false;
+
+    var t=((x1-x3)*(y3-y4)-(y1-y3)*(x3-x4))/den;
+    var u=((x1-x2)*(y1-y3)-(y1-y2)*(x1-x3))/den;
+
+    if(t>0 && t<1 && u>0){
+      var pt=createVector(x1+t*(x2-x1),y1+t*(y2-y1));
+      return pt;
+   }
+    else{
+      return false;
+    }
+    
+  }
+  show(){
+    var vec1=this.cast(b);
+    var vec2=this.cast(c);
+    if(vec1 && vec2){
+      if(magnitude(subtractVec(this.pos,vec1))>magnitude(subtractVec(this.pos,vec2))){
+        new line(this.pos.x,this.pos.y,vec2.x,vec2.y,"#aaa",2,"butt","none","glow");
+      }
+      else{
+        new line(this.pos.x,this.pos.y,vec1.x,vec1.y,"#aaa",2,"butt","none","glow");
+      }
+
+
+    }    
+    else if(vec2){
+      new line(this.pos.x,this.pos.y,vec2.x,vec2.y,"#aaa",2,"butt","none","glow");
+    }
+    else if(vec1){
+      new line(this.pos.x,this.pos.y,vec1.x,vec1.y,"#aaa",2,"butt","none","glow");
+    
+   }
+   
+  
+  else{
+     new line(this.pos.x,this.pos.y,this.pos.x-cos(this.angle)*1000,this.pos.y+sin(this.angle)*1000,"#aaa",1,"butt","none","glow");
+  }
+  }
+}
+
+
+//////////////////////////////////////////////////
 
 elem = document.getElementById("container");
 setCanvas(elem);
@@ -6,26 +85,25 @@ setCanvas(elem);
 w = WIDTH;
 h = HEIGHT;
 
-poss=[];
-n=20;
-for(i=0;i<n;i++){
-  pos={
-    x:random(0,w),
-    y:random(0,h),
-    r:random(10,20)
-  }
-  poss.push(pos);
-}
+fetch_mouse_pos(elem,"mousemove");
 
-t=0;
+t=PI/2;
 function draw() {
 
    clearCanvas();
-   for(i=1;i<n;i++){
-     new circle(poss[i].x,poss[i].y,poss[i].r,`hsl(${mapRange(poss[i].r,10,20,260,320)},100%,50%)`,1);
-     poss[i].x+=random(-0.1,0.1);
+
+   new Glow(2,"glow");
+
+   x=mousepos.x;
+    y=mousepos.y;
+   b= new Boundary(300,100,400,200);
+   b.show();
+   c= new Boundary(200,200,400,300);
+    c.show();
+   for(i=0;i<=2*PI;i+=PI/40){
+   r= new Ray(x,y,i);
+   r.show();
    }
- 
    requestAnimationFrame(draw);
 
 }
@@ -34,3 +112,4 @@ function draw() {
 ///////////////////////////////////////////////////////////////////////////////
 
 draw();
+
