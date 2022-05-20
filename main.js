@@ -1395,15 +1395,3 @@ class Glow{
         
     }
 }
-
-class DropShadow{
-    constructor(dx,dy,blur,floodColor,floodOpacity,id){
-
-        this.dx=dx;
-        this.dy=dy;
-        this.floodColor=floodColor;
-        this.floodOpacity=floodOpacity;
-        this.id=id;
-        this.filterContainer
-    }
-}
