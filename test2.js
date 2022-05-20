@@ -19,11 +19,12 @@ function draw() {
 
   new Glow(10, "glow");
   new GaussianBlur(10, "blur");
+  new Morph("dilate",t, "morph");
 
   x = mousepos.x;
   y = mousepos.y;
 
-  new circle(x, y, 20, "red",1,"#fff",0,"glow");
+  new circle(x, y, 20, "red",1,"#fff",0,"morph");
 
  
   requestAnimationFrame(draw);

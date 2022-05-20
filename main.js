@@ -1395,3 +1395,20 @@ class Glow{
         
     }
 }
+
+class Morph{
+    constructor(operator,radius,id){
+        this.operator = operator;   // dilate or erode
+        this.radius = radius;
+        this.id = id;
+        this.filterContainer= document.createElementNS("http://www.w3.org/2000/svg", "filter");
+        this.filterContainer.id = this.id;
+        this.filter= document.createElementNS("http://www.w3.org/2000/svg", "feMorphology");
+        this.filter.setAttributeNS(null,"operator",this.operator);
+        this.filter.setAttributeNS(null,"radius",this.radius);
+        this.filterContainer.appendChild(this.filter);
+        this.filterContainer.setAttributeNS(null,"filterUnits","userSpaceOnUse");
+        defs.appendChild(this.filterContainer);
+        return this.filterContainer;
+    }
+}
