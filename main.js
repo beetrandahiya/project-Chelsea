@@ -1412,3 +1412,41 @@ class Morph{
         return this.filterContainer;
     }
 }
+
+class PointLight{
+    constructor(x,y,z,color,id){
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        this.id = id;
+        this.color = color;
+        this.filterContainer= document.createElementNS("http://www.w3.org/2000/svg", "filter");
+        this.filterContainer.id = this.id;
+        this.filterSpec= document.createElementNS("http://www.w3.org/2000/svg", "feSpecularLighting");
+        this.filterSpec.setAttributeNS(null,"surfaceScale","1");
+        this.filterSpec.setAttributeNS(null,"specularConstant","1");
+        this.filterSpec.setAttributeNS(null,"specularExponent","10");
+        this.filterSpec.setAttributeNS(null,"lighting-color",this.color);
+        this.filterSpec.setAttributeNS(null,"result","this.id");
+        this.filterPoint= document.createElementNS("http://www.w3.org/2000/svg", "fePointLight");
+        this.filterPoint.setAttributeNS(null,"x",this.x);
+        this.filterPoint.setAttributeNS(null,"y",this.y);
+        this.filterPoint.setAttributeNS(null,"z",this.z);
+        this.filterSpec.appendChild(this.filterPoint);
+        this.filterComposite= document.createElementNS("http://www.w3.org/2000/svg", "feComposite");
+        this.filterComposite.setAttributeNS(null,"operator","arithmetic");
+        this.filterComposite.setAttributeNS(null,"in","SourceGraphic");
+        this.filterComposite.setAttributeNS(null,"in2","this.id");
+        this.filterComposite.setAttributeNS(null,"k1","1");
+        this.filterComposite.setAttributeNS(null,"k2","0");
+        this.filterComposite.setAttributeNS(null,"k3","0");
+        this.filterComposite.setAttributeNS(null,"k4","0");
+        this.filterComposite.setAttributeNS(null,"result","this.id");
+        this.filterContainer.appendChild(this.filterSpec);
+        this.filterContainer.appendChild(this.filterComposite);
+        this.filterContainer.setAttributeNS(null,"filterUnits","userSpaceOnUse");
+        defs.appendChild(this.filterContainer);
+        return this.filterContainer;
+        
+    }
+}
