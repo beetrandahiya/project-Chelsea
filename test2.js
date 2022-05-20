@@ -10,13 +10,12 @@ class Boundary{
   }
 
   show(){
-    new line(this.a.x,this.a.y,this.b.x,this.b.y,"#f8f",2);
+    new line(this.a.x,this.a.y,this.b.x,this.b.y,"#f8f",5);
   }
 }
 
 
 //ray
-
 class Ray{
   constructor(x,y,angle){
     this.pos=createVector(x,y);
@@ -48,31 +47,34 @@ class Ray{
     }
     
   }
-  show(){
+  show(points){
+    this.points=points;
+
     var vec1=this.cast(b);
     var vec2=this.cast(c);
     if(vec1 && vec2){
       if(magnitude(subtractVec(this.pos,vec1))>magnitude(subtractVec(this.pos,vec2))){
-        new line(this.pos.x,this.pos.y,vec2.x,vec2.y,"#aaa",2,"butt","none","glow");
+        this.points.push([vec2.x,vec2.y]);
       }
       else{
-        new line(this.pos.x,this.pos.y,vec1.x,vec1.y,"#aaa",2,"butt","none","glow");
+        this.points.push([vec1.x,vec1.y]);
       }
 
 
     }    
     else if(vec2){
-      new line(this.pos.x,this.pos.y,vec2.x,vec2.y,"#aaa",2,"butt","none","glow");
+      this.points.push([vec2.x,vec2.y]);
     }
     else if(vec1){
-      new line(this.pos.x,this.pos.y,vec1.x,vec1.y,"#aaa",2,"butt","none","glow");
+      this.points.push([vec1.x,vec1.y]);
     
    }
    
   
   else{
-     new line(this.pos.x,this.pos.y,this.pos.x-cos(this.angle)*1000,this.pos.y+sin(this.angle)*1000,"#aaa",1,"butt","none","glow");
+     this.points.push([this.pos.x-cos(this.angle)*600,this.pos.y+sin(this.angle)*600]);
   }
+
   }
 }
 
@@ -100,10 +102,12 @@ function draw() {
    b.show();
    c= new Boundary(200,200,400,300);
     c.show();
-   for(i=0;i<=2*PI;i+=PI/40){
+    points=[];
+   for(i=0;i<=2*PI;i+=PI/500){
    r= new Ray(x,y,i);
-   r.show();
+   r.show(points);
    }
+   new polygon(points,"#fff7",1,"#aaa",1,true);
    requestAnimationFrame(draw);
 
 }
