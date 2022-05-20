@@ -1413,6 +1413,8 @@ class Morph{
     }
 }
 
+/*
+
 class PointLight{
     constructor(x,y,z,color,id){
         this.x = x;
@@ -1450,3 +1452,5 @@ class PointLight{
         
     }
 }
+
+*/

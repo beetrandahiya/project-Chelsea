@@ -20,7 +20,7 @@ function draw() {
   new Glow(10, "glow");
   new GaussianBlur(10, "blur");
   new Morph("dilate",t, "morph");
-  new PointLight(100+30*cos(3*t), 100-50*sin(t), 10, "#f3f", "light");
+ // new PointLight(100+30*cos(3*t), 100-50*sin(t), 10, "#f3f", "light");
 
   x = mousepos.x;
   y = mousepos.y;
