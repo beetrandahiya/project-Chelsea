@@ -92,7 +92,8 @@ class Boundary {
   c = new Boundary(200, 200, 400, 300);
   d = new Boundary(100, 200, 100, 300);
   e = new Boundary(200, 200, 200, 300);
-  boundaries = [b,c,d,e];
+  f= new Boundary(100,400,300,400);
+  boundaries = [b,c,d,e,f];
   function draw() {
   
     clearCanvas();
