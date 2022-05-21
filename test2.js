@@ -14,7 +14,7 @@ fetch_mouse_pos(elem, "mousemove");
 //////////////////////////////////////////////////
 // Hilbert curve
 
-order=4;
+order=5;
 N= 2**order;
 total= N * N;
 
@@ -81,10 +81,11 @@ function draw() {
 
   clearCanvas();
 
+  new Gradient("horizontal",[["0%","#8fa1f7"],["40%","#8d7fd4"],["100%","#691796"]],"pad","grad");
   
-  new polygon(hilbert_points_array.slice(0,t),"none",0,"#aaa",4 ,false);
+  new polygon(hilbert_points_array.slice(0,t),"none",0,"url(#grad)",4 ,false);
   if(t<total){
-   t++;}
+   t+=1;}
   requestAnimationFrame(draw);
 
 }
