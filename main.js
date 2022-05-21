@@ -1413,6 +1413,23 @@ class Morph{
     }
 }
 
+class Distortion{
+    constructor(type,radius,id){
+        this.type = type;   // dilate or erode
+        this.radius = radius;
+        this.id = id;
+        this.filterContainer= document.createElementNS("http://www.w3.org/2000/svg", "filter");
+        this.filterContainer.id = this.id;
+        this.filter= document.createElementNS("http://www.w3.org/2000/svg", "feDistortion");
+        this.filter.setAttributeNS(null,"type",this.type);
+        this.filter.setAttributeNS(null,"radius",this.radius);
+        this.filterContainer.appendChild(this.filter);
+        this.filterContainer.setAttributeNS(null,"filterUnits","userSpaceOnUse");
+        defs.appendChild(this.filterContainer);
+        return this.filterContainer;
+    }
+}
+
 /*
 
 class PointLight{
