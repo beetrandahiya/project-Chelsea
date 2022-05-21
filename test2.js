@@ -10,25 +10,81 @@ h = HEIGHT;
 
 fetch_mouse_pos(elem, "mousemove");
 
-t = PI / 2;
+
+//////////////////////////////////////////////////
+// Hilbert curve
+
+order=4;
+N= 2**order;
+total= N * N;
+
+// first order hilbert curve
+
+function hilbert(i){
+  points=[
+    createVector(0,0),
+    createVector(0,1),
+    createVector(1,1),
+    createVector(1,0),
+  ];
+
+  index=i & 3;
+
+  v = points[index]; 
+
+  for(j=1;j<order;j++){
+
+  i=i>>>2;
+  index=i & 3;
+
+  l = 2**j;
+  if(index==0){
+    //do nothing
+    temp=v.x;
+    v.x=v.y;
+    v.y=temp;
+  }
+  else if(index ==1){ 
+    v.y+=l;
+  }
+  else if(index ==2){
+    v.x+=l;
+    v.y+=l;
+  }
+  else if(index ==3){
+    temp= l- 1 - v.x;
+    v.x= l-1 - v.y;
+    v.y= temp;
+    v.x+=l;
+  }
+}
+  return v;
+  
+}
+
+//make array
+hilbert_points=[];
+hilbert_points_array=[];
+len = w/N;
+for(i=0; i<total; i++){
+  hilbert_points.push(multiplyVec(hilbert(i), len)); 
+
+  hilbert_points_array.push([hilbert_points[i].x+len/2 , hilbert_points[i].y+len/2]);
+}
 
 
+
+
+console.log(hilbert_points_array);
+t=1;
 function draw() {
 
   clearCanvas();
 
-  new Glow(10, "glow");
-  new GaussianBlur(10, "blur");
-  new Morph("dilate",t, "morph");
- // new PointLight(100+30*cos(3*t), 100-50*sin(t), 10, "#f3f", "light");
-
-  x = mousepos.x;
-  y = mousepos.y;
-
-  new circle(x, y, 20, "#fff",1,"#fff",0);
-  new circle(100, 100, 40, "red",1,"#f00",1,"light");
-
- t+=0.03;
+  
+  new polygon(hilbert_points_array.slice(0,t),"none",0,"#aaa",4 ,false);
+  if(t<total){
+   t++;}
   requestAnimationFrame(draw);
 
 }
