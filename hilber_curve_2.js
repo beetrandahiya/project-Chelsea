@@ -1,3 +1,5 @@
+
+
 //////////////////////////////////////////////////
 
 elem = document.getElementById("container");
@@ -12,7 +14,7 @@ fetch_mouse_pos(elem, "mousemove");
 //////////////////////////////////////////////////
 // Hilbert curve
 
-order=4;
+order=5;
 N= 2**order;
 total= N * N;
 
