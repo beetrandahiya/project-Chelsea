@@ -8,16 +8,13 @@ h = HEIGHT;
 
 fetch_mouse_pos(elem, "mousemove");
 
-n=9;
+n=3;
 points=[];
 colors=[];
 for(i=0;i<n;i++){
   points[i]= createVector(random(0,w),random(0,h));
 }
 
-for(i=0;i<n;i++){
-  colors[i]=randomColorHex();
-}
 
 
 // voronoi diagram
@@ -47,32 +44,15 @@ t=1;
 function draw() {
 
  clearCanvas();
-
- dd=w/t;
-  for(i=0;i<w;i+=dd){
-    for(j=0;j<h;j+=dd){
-      d=w;
-      k1=0;
-      for(k=0;k<n;k++){
-      d1=dist(i,j,points[k].x,points[k].y);
-      if(d1<d){
-        d=d1;
-        k1=k;
-      }
-    }
-    new rect(i,j,dd,dd,colors[k1],1,colors[k1],1);
-  }
-}
+voronoi();
 
 for(i=0;i<n;i++){
   new point(points[i].x,points[i].y,"#aaa",4);
 
 }
-  //voronoi();
-  if(t<60){
-  t+=0.1;
+ 
   requestAnimationFrame(draw);
-  }
+  
 
 }
 
