@@ -8,83 +8,70 @@ h = HEIGHT;
 
 fetch_mouse_pos(elem, "mousemove");
 
-
-//////////////////////////////////////////////////
-// Hilbert curve
-
-order=4;
-N= 2**order;
-total= N * N;
-
-// first order hilbert curve
-
-function hilbert(i){
-  points=[
-    createVector(0,0),
-    createVector(0,1),
-    createVector(1,1),
-    createVector(1,0),
-  ];
-
-  index=i & 3;
-
-  v = points[index]; 
-
-  for(j=1;j<order;j++){
-
-  i=i>>>2;
-  index=i & 3;
-
-  l = 2**j;
-  if(index==0){
-    //do nothing
-    temp=v.x;
-    v.x=v.y;
-    v.y=temp;
-  }
-  else if(index ==1){ 
-    v.y+=l;
-  }
-  else if(index ==2){
-    v.x+=l;
-    v.y+=l;
-  }
-  else if(index ==3){
-    temp= l- 1 - v.x;
-    v.x= l-1 - v.y;
-    v.y= temp;
-    v.x+=l;
-  }
-}
-  return v;
-  
+n=9;
+points=[];
+colors=[];
+for(i=0;i<n;i++){
+  points[i]= createVector(random(0,w),random(0,h));
 }
 
-//make array
-hilbert_points=[];
-hilbert_points_array=[];
-len = w/N;
-for(i=0; i<total; i++){
-  hilbert_points.push(multiplyVec(hilbert(i), len)); 
-
-  hilbert_points_array.push([hilbert_points[i].x+len/2 , hilbert_points[i].y+len/2]);
+for(i=0;i<n;i++){
+  colors[i]=randomColorHex();
 }
 
 
+// voronoi diagram
+function voronoi(){
+  for(i=0;i<n;i++){
+    for(j=0;j<n;j++){
+      if(i!=j){
 
+        m1=(points[i].y-points[j].y)/(points[i].x-points[j].x);
+        m2=-1/m1;
+        x=(points[i].x+points[j].x)/2;
+        y=(points[i].y+points[j].y)/2;
+
+        x1=x-w*cos(atan(m2));
+        y1=y-h*sin(atan(m2));
+        x2=x+w*cos(atan(m2));
+        y2=y+h*sin(atan(m2));
+
+        new line(x1,y1,x2,y2,"#aaa",2);
+
+            }
+    }
+  }
+}
 
 t=1;
 function draw() {
 
-  clearCanvas();
+ clearCanvas();
 
-  for(i=0; i<t-1; i++){
-    c = lerpHex("#8fa1f7", "#691796",i/t);
-    new line(hilbert_points_array[i][0],hilbert_points_array[i][1],hilbert_points_array[i+1][0],hilbert_points_array[i+1][1],c,10,"round");
+ dd=w/t;
+  for(i=0;i<w;i+=dd){
+    for(j=0;j<h;j+=dd){
+      d=w;
+      k1=0;
+      for(k=0;k<n;k++){
+      d1=dist(i,j,points[k].x,points[k].y);
+      if(d1<d){
+        d=d1;
+        k1=k;
+      }
+    }
+    new rect(i,j,dd,dd,colors[k1],1,colors[k1],1);
   }
-  if(t<total){
-   t+=1;
-   requestAnimationFrame(draw);
+}
+
+for(i=0;i<n;i++){
+  new point(points[i].x,points[i].y,"#aaa",4);
+
+}
+  //voronoi();
+  if(t<60){
+  t+=0.1;
+  requestAnimationFrame(draw);
   }
 
 }
