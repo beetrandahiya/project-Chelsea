@@ -48,7 +48,6 @@ voronoi();
 
 for(i=0;i<n;i++){
   new point(points[i].x,points[i].y,"#aaa",4);
-
 }
  
   requestAnimationFrame(draw);
