@@ -3,8 +3,15 @@
 body{
     font-family: 'Inter', sans-serif;
 }
+.dark{
+    background-color: #3b3b3b;
+    color: #fff;
+}
 #fps{
-    border: 1px solid black;
+    border: 1px solid #333;
+    border-radius: 2px;
+    padding: 5px;
+    
 }
 
 #container{
@@ -12,10 +19,11 @@ body{
     height: 512px;
     margin: 0 auto;
     background-color: #000;
-    border: 1px solid #ccc; 
+    border: 2px solid #888; 
     border-radius: 5px;
 }
 
 :not(svg){
     transform-origin: center;
 }
+

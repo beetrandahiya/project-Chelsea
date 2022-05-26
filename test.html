@@ -11,15 +11,21 @@
 <body>
    
     <div id="container" ></div>
-    <span id="fps">--</span> FPS
+    <span id="fps" class="fpsc">--</span> FPS
 
     <script src="main.js"></script>
-    <script src="test2.js"></script>
+    <script src="flocking.js"></script>
     <script src="fpscounter.js"></script>
  <!--<script src="./gpu.js"></script>
     <script src="./gpu_js_test.js">
   </script>
 -->
+<script>
+  //dark mode
+  if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    document.body.classList.add('dark');
+  }
+</script>
     
 </body>
 </html>
