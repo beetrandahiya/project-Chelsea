@@ -834,6 +834,10 @@ function normalize(v) {
     return createVector(v.x / l, v.y / l);
 }
 
+function setMagnitude(v, l) {
+    return multiplyVec(normalize(v), l);
+}
+
 function projection(v1, v2) {
     return dotProduct(v1, v2) / magnitude(v2);
 }
@@ -876,6 +880,12 @@ function divideVec(v, scalar) {
 
 function distanceVec(v1, v2) {
     return magnitude(subtractVec(v1, v2));
+}
+function limitVec(v, max){
+    if(magnitude(v)>max){
+        return setMagnitude(v,max);
+    }
+    return v;
 }
 
 function angle(v) {
