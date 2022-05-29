@@ -15,10 +15,10 @@ body{
 }
 
 #container{
-    width: 512px;
+    width: 1024px;
     height: 512px;
     margin: 0 auto;
-    background-color: #fff;
+    background-color: #333;
     border: 2px solid #888; 
     border-radius: 5px;
 }
