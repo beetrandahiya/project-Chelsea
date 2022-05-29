@@ -933,6 +933,15 @@ function mapRange (value, a, b, c, d) {
 }
 ///////////////////////////////////////////////////////////////////////////////
 
+function constrain(value, min, max) {
+    if(value<min){
+        return min;
+    }
+    if(value>max){
+        return max;
+    }
+    return value;
+}
 /////////// function to convert degree to radian ///////////////////
 function degToRad(deg) {
     return deg * Math.PI / 180;
