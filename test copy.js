@@ -10,103 +10,138 @@ h=HEIGHT;
 
    fetch_mouse_pos(elem,'mousemove');
    
-   G=10**1  ;
-   m1=20;
-   m2=20;
-   m3=20;
-  
-   x1=w/2-100;
-   y1=150;
+   G=10**-3.5  ;
 
-   x2=w/2+100;
-   y2=150;
-   
-   x3=w/2;
-   y3=273.2+50;
- 
-v=1;
-   vm1={
-    x: -v/2,
-    y: v*Math.sqrt(3)/2
-};
-    vm2={
-    x: -v/2,
-    y: -v*Math.sqrt(3)/2
-};
-    vm3={
-      x: v,
-      y: 0
-  };
+   class Particle {
+    constructor(x,y,m,vx,vy) {
+      this.x=x;
+      this.y=y;
+      this.m=m;
+      this.trail=[];
+      this.r=sqrt(m);
+      var c=random(160,320);
+      this.c=`hsl(${c},100%,50%)`;
+      this.c_trail=`hsla(${c},100%,50%,0.5)`;
+      this.v={
+        x:vx,
+        y:vy
+      };
+      this.a={
+        x:0,
+        y:0
+      };
+    }
+    calculateForce(other) {
+      let dx=this.x-other.x;
+      let dy=this.y-other.y;
+      let F_gravity = G*this.m*other.m;
+      let F_x=-F_gravity*dx/sqrt(dx*dx+dy*dy);
+      let F_y=-F_gravity*dy/sqrt(dx*dx+dy*dy);
+      return {
+        x:F_x,
+        y:F_y
+      };
+    }
+    calculateAcceleration(other) {
+      let F=this.calculateForce(other);
+      let a_x=F.x/this.m;
+      let a_y=F.y/this.m;
+      return {
+        x:a_x,
+        y:a_y
+      };
+    }
+    calculateAccelerationAll(particles) {
+
+      this.a.x = 0;
+      this.a.y = 0;
+      for(let i=0;i<particles.length;i++){
+        let other=particles[i];
+        if(other!=this){
+          let a_other=this.calculateAcceleration(other);
+          this.a.x+=a_other.x;
+          this.a.y+=a_other.y;
+        }
+      }
+    }
+    //fuse on collision with another particle
+    fuse(other) {
+      let dx=this.x-other.x;
+      let dy=this.y-other.y;
+      let dist=Math.sqrt(dx*dx+dy*dy);
+      if(dist<this.r+other.r){
+        // make new particle
+        let new_m=this.m+other.m;
+        let new_x=(this.m*this.x+other.m*other.x)/new_m;
+        let new_y=(this.m*this.y+other.m*other.y)/new_m;
+        let new_vx=(this.m*this.v.x+other.m*other.v.x)/new_m;
+        let new_vy=(this.m*this.v.y+other.m*other.v.y)/new_m;
+        let new_particle=new Particle(new_x,new_y,new_m,new_vx,new_vy);
+        // remove old particles
+        particles.splice(particles.indexOf(this),1);
+        particles.splice(particles.indexOf(other),1);
+        // add new particle
+        particles.push(new_particle);
+      }
+    }
+    // fuse all
+    fuseAll(particles) {
+      for(let i=0;i<particles.length;i++){
+        let other=particles[i];
+        if(other!=this){
+          this.fuse(other);
+        }
+      }
+    }
+    update() {
+      this.trail.push([this.x,this.y]);
+      if(this.trail.length>70){
+        this.trail.shift();
+      }
+      this.v.x+=this.a.x;
+      this.v.y+=this.a.y;
+      this.x+=this.v.x;
+      this.y+=this.v.y;
+    }
+    show() {
+      new circle(this.x,this.y,this.r,this.c,0.7,this.c,0);
+    }
+    show_trail() {
+      new polygon(this.trail,this.c,0,this.c_trail,1);
+    }
+
+  }
 
    
    colors=['#17078B','#4F03A1','#AA2595','#C5417D','#DB5C67','#E97158','#F8973F','#FCB530','#F3EE22']
    Fabsmax=0;
    Fabsmin=0;
    t=0;
-   points1=[];
-    points2=[];
-    points3=[];
+
+    particles=[];
+    for(let i=0;i<20;i++){
+      let x=w/2+(w/4)*cos(random(0,2*PI));
+      let y=h/2+(h/4)*sin(random(0,2*PI));
+      let m=random(30,40);
+      let vx=random(-1,1);
+      let vy=random(-1,1);
+      let p=new Particle(x,y,m,vx,vy);
+      particles.push(p);
+    }
+
 
 function draw() {
    
   clearCanvas();
   
-  new circle(x1,y1,10,'#C10FF0','#000000');
-  new circle(x2,y2,10,'#EA4567');
-  new circle(x3,y3,10,'#F7BFCD');
-  points1.push({x:x1,y:y1});
-  points2.push({x:x2,y:y2});
-  points3.push({x:x3,y:y3});
- // new line(x1,y1,x2,y2,'#fff');
- // new line(x1,y1,x3,y3,'#fff');
- // new line(x2,y2,x3,y3,'#fff');
-  //new line(x1,y1,(x1+x2+x3)/3,(y1+y2+y3)/3,'#fff');
-  //new line(x2,y2,(x1+x2+x3)/3,(y1+y2+y3)/3,'#fff');
-  //new line(x3,y3,(x1+x2+x3)/3,(y1+y2+y3)/3,'#fff');
-
-  /*
-  if(points1.length>200)
-  {
-    points1.shift();
-    points2.shift();
-    points3.shift();
+  for(let i=0;i<particles.length;i++){
+    let p=particles[i];
+    p.calculateAccelerationAll(particles);
+    //p.fuseAll(particles);
+    p.update();
+    p.show();
+    p.show_trail();
   }
-  for(i=0;i<points1.length;i++){
-    new circle(points1[i].x,points1[i].y,1,'#C10FF0');
-    new circle(points2[i].x,points2[i].y,1,'#EA4567');
-    new circle(points3[i].x,points3[i].y,1,'#F7BFCD');
-  }
- */
- 
-
-  Fm1m2=Fbetween(x1,y1,x2,y2,m1,m2);
-  Fm2m3=Fbetween(x2,y2,x3,y3,m2,m3);
-  Fm1m3=Fbetween(x1,y1,x3,y3,m1,m3);
-
-  Fon1={x:Fm1m2.x+Fm1m3.x,y:Fm1m2.y+Fm1m3.y};
-  Fon2={x:Fm2m3.x-Fm1m2.x,y:Fm2m3.y-Fm1m2.y};
-  Fon3={x:-Fm1m3.x-Fm2m3.x,y:-Fm1m3.y-Fm2m3.y};
-
-  am1={x:Fon1.x/m1,y:Fon1.y/m1};
-  am2={x:Fon2.x/m2,y:Fon2.y/m2};
-  am3={x:Fon3.x/m3,y:Fon3.y/m3};
-
-  vm1.x+=am1.x;
-  vm1.y+=am1.y;
-  vm2.x+=am2.x;
-  vm2.y+=am2.y;
-  vm3.x+=am3.x;
-  vm3.y+=am3.y;
-  
-  x1+=vm1.x;
-  y1+=vm1.y;
-  x2+=vm2.x;
-  y2+=vm2.y;
-  x3+=vm3.x;
-  y3+=vm3.y;
-
-
-
 
 
 
@@ -122,6 +157,7 @@ function Fbetween(x1,y1,x2,y2,m1,m2) {
   }
   return F;
 }
+
 ///////////////////////////////////////////////////////////////////////////////
 
 

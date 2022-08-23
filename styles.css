@@ -14,8 +14,8 @@ body{
 }
 
 #container{
-    width: 512px;
-    height: 512px;
+    width: 1080px;
+    height: 720px;
     margin: 0 auto;
     background-color: #333;
     border: 2px solid #888; 
