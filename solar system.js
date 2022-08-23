@@ -13,12 +13,12 @@ h=HEIGHT;
    G=10**-3.5  ;
 
    class Particle {
-    constructor(x,y,m,vx,vy) {
+    constructor(x,y,m,vx,vy,r) {
       this.x=x;
       this.y=y;
       this.m=m;
       this.trail=[];
-      this.r=sqrt(m);
+      this.r=r||sqrt(m);
       var c=random(160,320);
       this.c=`hsl(${c},100%,50%)`;
       this.c_trail=`hsla(${c},100%,50%,0.5)`;
@@ -119,14 +119,18 @@ h=HEIGHT;
    t=0;
 
     particles=[];
-    for(let i=0;i<6;i++){
-      let x=w/2+(w/4)*cos(random(0,2*PI));
-      let y=h/2+(h/4)*sin(random(0,2*PI));
-      let m=random(30,40);
-      let vx=random(-1,1);
-      let vy=random(-1,1);
-      let p=new Particle(x,y,m,vx,vy);
-      particles.push(p);
+    //sun
+    sun=new Particle(w/2,h/2,1000,0,0,100);
+    particles.push(sun);
+    for(let i=0;i<1;i++){
+        let x= w/2+ 300;
+        let y= h/2;
+        let m=1;
+        let vx=0;
+        let vy=9.8;
+        let r=10;
+        let p=new Particle(x,y,m,vx,vy,r);
+        particles.push(p);
     }
 
 
