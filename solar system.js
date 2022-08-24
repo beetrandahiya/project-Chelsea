@@ -123,11 +123,11 @@ h=HEIGHT;
     sun=new Particle(w/2,h/2,1000,0,0,100);
     particles.push(sun);
     for(let i=0;i<1;i++){
-        let x= w/2+ 300;
+        let x= w/2+ 200;
         let y= h/2;
-        let m=1;
+        let m=0.1;
         let vx=0;
-        let vy=9.8;
+        let vy=10;
         let r=10;
         let p=new Particle(x,y,m,vx,vy,r);
         particles.push(p);
