@@ -19,7 +19,7 @@ h=HEIGHT;
       this.m=m;
       this.trail=[];
       this.r=r||sqrt(m);
-      var c=random(160,320);
+      var c=random(0,340);
       this.c=`hsl(${c},100%,50%)`;
       this.c_trail=`hsla(${c},100%,50%,0.5)`;
       this.v={
@@ -95,7 +95,7 @@ h=HEIGHT;
     }
     update() {
       this.trail.push([this.x,this.y]);
-      if(this.trail.length>200){
+      if(this.trail.length>100){
         this.trail.shift();
       }
       this.v.x+=this.a.x;
@@ -120,14 +120,14 @@ h=HEIGHT;
 
     particles=[];
     //sun
-    sun=new Particle(w/2,h/2,1000,0,0,100);
+    sun=new Particle(w/2,h/2,1000,0,0,50);
     particles.push(sun);
-    for(let i=0;i<1;i++){
-        let x= w/2+ 200;
+    for(let i=0;i<8;i++){
+        let x= w/2+ 80+i*30;
         let y= h/2;
         let m=0.1;
         let vx=0;
-        let vy=10;
+        let vy=6+i*0.5;
         let r=10;
         let p=new Particle(x,y,m,vx,vy,r);
         particles.push(p);
