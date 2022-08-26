@@ -122,18 +122,18 @@ h=HEIGHT;
     
     //particle 1
     m=50;
-    m2=50;
-    v1=2;
+    m2=8980;
+    v1=5;
     v2=0.5;
     r=5;
-    p1=new Particle(w/2,h/2+50,m,-v1,0,r);
+    p1=new Particle(w/2,h/2,m2,0,0,r);
     particles.push(p1);
 
-    p2=new Particle(w/2,h/2-50,m,v1,0,r);
+    p2=new Particle(w/2+200,h/2,m,0,-v1,r);
     particles.push(p2);
 
     //particle 3
-    p3=new Particle(w/2+300,h/2,m2,0,-v2,r);
+    p3=new Particle(w/2-200,h/2,m,0,v1,r);
     particles.push(p3);
 
     
