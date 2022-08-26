@@ -13,12 +13,12 @@ h=HEIGHT;
    G=10**-3.5  ;
 
    class Particle {
-    constructor(x,y,m,vx,vy) {
+    constructor(x,y,m,vx,vy,r) {
       this.x=x;
       this.y=y;
       this.m=m;
       this.trail=[];
-      this.r=sqrt(m);
+      this.r=r||sqrt(m);
       var c=random(160,320);
       this.c=`hsl(${c},100%,50%)`;
       this.c_trail=`hsla(${c},100%,50%,0.5)`;
@@ -95,7 +95,7 @@ h=HEIGHT;
     }
     update() {
       this.trail.push([this.x,this.y]);
-      if(this.trail.length>200){
+      if(this.trail.length>400){
         this.trail.shift();
       }
       this.v.x+=this.a.x;
@@ -119,15 +119,24 @@ h=HEIGHT;
    t=0;
 
     particles=[];
-    for(let i=0;i<6;i++){
-      let x=w/2+(w/4)*cos(random(0,2*PI));
-      let y=h/2+(h/4)*sin(random(0,2*PI));
-      let m=random(30,40);
-      let vx=random(-1,1);
-      let vy=random(-1,1);
-      let p=new Particle(x,y,m,vx,vy);
-      particles.push(p);
-    }
+    
+    //particle 1
+    m=50;
+    m2=50;
+    v1=2;
+    v2=0.5;
+    r=5;
+    p1=new Particle(w/2,h/2+50,m,-v1,0,r);
+    particles.push(p1);
+
+    p2=new Particle(w/2,h/2-50,m,v1,0,r);
+    particles.push(p2);
+
+    //particle 3
+    p3=new Particle(w/2+300,h/2,m2,0,-v2,r);
+    particles.push(p3);
+
+    
 
 
 function draw() {
