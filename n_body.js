@@ -121,19 +121,32 @@ h=HEIGHT;
     particles=[];
     
     //particle 1
+
+    r0_x=0.9700436*100;
+    r0_y=-0.24308753*100;
+    v0_x=0.466203685;
+    v0_y=0.43236573;
+
+    r1_x= -r0_x;
+    r1_y= -r0_y;
+    v1_x=v0_x;
+    v1_y=v0_y;
+
+    r2_x=0;
+    r2_y=0;
+    v2_x=-2*v0_x;
+    v2_y=-2*v0_y;
+
     m=50;
-    m2=8980;
-    v1=5;
-    v2=0.5;
-    r=5;
-    p1=new Particle(w/2,h/2,m2,0,0,r);
+
+    p1=new Particle(w/2+r0_x,h/2+r0_y,m,v0_x,v0_y);
     particles.push(p1);
 
-    p2=new Particle(w/2+200,h/2,m,0,-v1,r);
+    p2=new Particle(w/2+r1_x,h/2+r1_y,m,v1_x,v1_y);
     particles.push(p2);
 
     //particle 3
-    p3=new Particle(w/2-200,h/2,m,0,v1,r);
+    p3=new Particle(w/2+r2_x,h/2+r2_y,m,v2_x,v2_y);
     particles.push(p3);
 
     
