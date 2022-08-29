@@ -12,7 +12,12 @@ n=50
 for (i = 0; i < n; i++) {
   arr[i] = [];
   for (j = 0; j < n; j++) {
-    arr[i][j] = randomBool();
+    if(i>20 && i<30 && j>20 && j<30){
+
+    arr[i][j] = randomBool();}
+    else{
+      arr[i][j] = false;
+    }
   }
 }
 t=random(0,360);

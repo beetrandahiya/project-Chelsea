@@ -8,7 +8,7 @@ h = HEIGHT;
 
 fetch_mouse_pos(elem, 'mousemove');
 
-G =  6.674*10**-3.533;
+G =  6.674*10**-4.5;
 
 class Particle {
     constructor(x, y, z, m, vx, vy, vz, r) {
@@ -127,7 +127,7 @@ v2_x = -2 * v0_x;
 v2_y = -2 * v0_y;
 v2_z = -2 * v0_z;
 
-m = 10;
+m = 50;
 
 p1 = new Particle(w / 2 + r0_x, h / 2 + r0_y, r0_z, m, v0_x, v0_y, v0_z, sqrt(m));
 particles.push(p1);
