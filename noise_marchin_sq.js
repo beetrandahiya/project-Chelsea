@@ -23,19 +23,14 @@ function draw() {
 
 for (i = 0; i < w; i += ii) {
     for (j = 0; j < h; j += ii) {
-      for(liness=1.2;liness<1.9;liness+=0.3){
-         var cc=mapRange(liness,1.2,4,160,320);
-         drawContour(liness,`hsl(${cc},100%,50%)`);
-             }
-            for(liness=2.1;liness<4;liness+=0.5){
-               var cc=mapRange(liness,1.2,4,160,320);
-        drawContour(liness,`hsl(${cc},100%,50%)`);
-            }
-         
+        drawContour(1.5,`hsl(320,100%,50%)`);
+        drawContour(2.3,`hsl(300,100%,50%)`);
+       drawContour(3,`hsl(280,100%,50%)`);
+         drawContour(5,`hsl(250,100%,50%)`);
     }
  }
- t+=0.1;
- requestAnimationFrame(draw);
+t+=0.01;
+  requestAnimationFrame(draw);
   
 
 }
@@ -70,30 +65,30 @@ function drawContour(fac,color){
           if (activec[0] == 1) {
              dx = i + (c - d[0]) * ii / (d[1] - d[0]);
              dy = j + (c - d[0]) * ii / (d[2] - d[0]);
-             new line(dx, j, i, dy, color, 2,"round");
+             new line(dx, j, i, dy, color, 3,"round");
           } else if (activec[1] == 1) {
              dx = i + ((c-d[0])*ii)/(d[1]-d[0]);
              dy = j + ((c-d[1])*ii)/(d[3]-d[1]);
-             new line(dx, j, i+ii, dy, color, 2,"round");
+             new line(dx, j, i+ii, dy, color, 3,"round");
           } else if (activec[2] == 1) {
              dx = i + ((c-d[2])*ii)/(d[3]-d[2]);
              dy = j + ((c-d[0])*ii)/(d[2]-d[0]);
-             new line(i, dy, dx, j+ii, color, 2,"round");
+             new line(i, dy, dx, j+ii, color, 3,"round");
           } else if (activec[3] == 1) {
              dx = i + ((c-d[2])*ii)/(d[3]-d[2]);
              dy = j + ((c-d[1])*ii)/(d[3]-d[1]);
-             new line(i+ii, dy,dx,j+ii, color, 2,"round");
+             new line(i+ii, dy,dx,j+ii, color, 3,"round");
          
           }
        } else if (activeconvers == 2) {
           if ((activec[0] == 1 && activec[1] == 1) || (activec[2] == 1 && activec[3] == 1)) {
              dy1 = j + (c - d[0]) * ii / (d[2] - d[0]);
              dy2 = j + (c - d[1]) * ii / (d[3] - d[1]);
-             new line(i, dy1, i + ii, dy2, color, 2,"round");
+             new line(i, dy1, i + ii, dy2, color, 3,"round");
           } else if ((activec[0] == 1 && activec[2] == 1) || (activec[1] == 1 && activec[3] == 1)) {
              dx1 = i + (c - d[0]) * ii / (d[1] - d[0]);
              dx2 = i + (c - d[2]) * ii / (d[3] - d[2]);
-             new line(dx1, j, dx2, j + ii, color, 2,"round");
+             new line(dx1, j, dx2, j + ii, color, 3,"round");
           }
          
 
@@ -102,19 +97,19 @@ function drawContour(fac,color){
           if (activec[0] == 0) {
              dx = i + (c - d[0]) * ii / (d[1] - d[0]);
              dy = j + (c - d[0]) * ii / (d[2] - d[0]);
-             new line(dx, j, i, dy, color, 2,"round");
+             new line(dx, j, i, dy, color, 3,"round");
           } else if (activec[1] == 0) {
              dx = i + ((c-d[0])*ii)/(d[1]-d[0]);
              dy = j + ((c-d[1])*ii)/(d[3]-d[1]);
-             new line(dx, j, i+ii, dy, color, 2,"round");
+             new line(dx, j, i+ii, dy, color, 3,"round");
           } else if (activec[2] == 0) {
              dx = i + ((c-d[2])*ii)/(d[3]-d[2]);
              dy = j + ((c-d[0])*ii)/(d[2]-d[0]);
-             new line(i, dy, dx, j+ii, color, 2,"round");
+             new line(i, dy, dx, j+ii, color, 3,"round");
           } else if (activec[3] == 0) {
              dx = i + ((c-d[2])*ii)/(d[3]-d[2]);
              dy = j + ((c-d[1])*ii)/(d[3]-d[1]);
-             new line(i+ii, dy,dx,j+ii, color, 2,"round");
+             new line(i+ii, dy,dx,j+ii, color, 3,"round");
          
           }         }
 
