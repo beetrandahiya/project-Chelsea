@@ -9,7 +9,7 @@ h = HEIGHT;
 fetch_mouse_pos(elem, "mousemove");
 
 
-var noise1= new noise(229);
+var noise1= new noise(1);
 var t=0;
 var ii=10;
 var c=1;
@@ -35,7 +35,7 @@ for (i = 0; i < w; i += ii) {
     }
  }
  t+=0.1;
- requestAnimationFrame(draw);
+// requestAnimationFrame(draw);
   
 
 }
