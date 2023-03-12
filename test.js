@@ -35,7 +35,7 @@ for (i = 0; i < w; i += ii) {
     }
  }
  t+=0.1;
-// requestAnimationFrame(draw);
+ requestAnimationFrame(draw);
   
 
 }
