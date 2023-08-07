@@ -123,16 +123,21 @@ function checkMembraneBounce(particle){
 
 function calculateEnergy(){
 	var El=0;
+	var l=0;
 	var Er=0;
+	var r=0;
 	for(i=0;i<n;i++){
 		if(particles[i].x<w/2){
 			El+=particles[i].vx**2+particles[i].vy**2;
+			l++;
 		}
 		else{
 			Er+=particles[i].vx**2+particles[i].vy**2;
+			r++;
 		}
 	}
-	return [El,Er];
+
+	return [El/l,Er/r];
 }
 
 ///////////////////////////////////////////////////////////////////////////////
